@@ -5,4 +5,19 @@
   
  <mapper namespace="com.honjal.honjal.dao.ext.ContentDao">
  
+ 	<insert id="insert" parameterType="ContentVO">
+ 		INSERT INTO tbl_content(member_num, content_nname, board_code, content_date, content_time, content_title, content_text)
+ 		VALUES(#{member_num}, #{content_nname}, #{board_code}, #{content_date}, #{content_time}, #{content_title}, #{content_text})
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="ContentVO">
+ 		UPDATE tbl_content
+ 		SET content_title = #{content_title}, content_text = #{content_text}
+ 		WHERE content_num = #{content_num}
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="Long">
+ 		DELETE FROM tbl_content WHERE content_num = #{content_num}
+ 	</delete>
+ 	
  </mapper>

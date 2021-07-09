@@ -108,6 +108,12 @@ footer {
 			<c:when test="${BODY == 'WRITE' }">
 				<%@ include file="/WEB-INF/views/write.jsp"%>
 			</c:when>
+			<c:when test="${BODY == 'JOIN' }">
+				<%@ include file="/WEB-INF/views/join.jsp"%>
+			</c:when>
+			<c:when test="${BODY == 'READ' }">
+				<%@ include file="/WEB-INF/views/read.jsp"%>
+			</c:when>
 			<c:otherwise>
 				<%@ include file="/WEB-INF/views/main.jsp"%>
 			</c:otherwise>

@@ -8,8 +8,8 @@
         <form id="login_box" method="POST">
           <input name="" placeholder="ID" />
           <input name="" type="password" placeholder="PASSWORD" />
-          <button type="button">LOGIN</button>
-          <button type="button">SIGN UP</button>
+          <button id="btn_login" type="button">LOGIN</button>
+          <button id="btn_join" type="button">SIGN UP</button>
         </form>
       </section>
       <section id="main_slide">
@@ -36,12 +36,10 @@
           <img src="${rootPath}/static/images/sample_best.png"/>
           <ol>
             <li class="list_best">
-              <span>1위 </span>1시간만에 끝! 벽걸이 에어컨 분해없는 셀프청소
-              노하우
+              <span>1위 </span>1시간만에 끝! 벽걸이 에어컨 분해없는 셀프청소 노하우
             </li>
             <li class="list_best">
-              <span>2위 </span>니트 세탁법: 이제 드라이 맡기지 말고 집에서
-              손쉽게!
+              <span>2위 </span>니트 세탁법: 이제 드라이 맡기지 말고 집에서 손쉽게!
             </li>
             <li class="list_best">
               <span>3위 </span>옷은 다 어디에 있냐고요? 예쁜 원룸 속 옷 수납법!
@@ -182,3 +180,16 @@
         </tr>
       </table>
     </article>
+    
+<script>
+
+document.querySelector("#main_user").addEventListener("click",(e)=>{
+	   let text = e.target.textContent
+	   let url = `${rootPath}`
+	   if(text === "SIGN UP"){
+	      url += "/join";
+	   }
+	   location.href = url
+	})
+
+</script>

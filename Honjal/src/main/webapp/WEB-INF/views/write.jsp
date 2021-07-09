@@ -42,7 +42,7 @@
 			<textarea class="write_text" placeholder="내용을 입력해주세요."></textarea>
 		</fieldset>
 		<div class="write_bottom">
-			<button type="submit">글쓰기</button>
+			<button id="btn_write" type="submit">글쓰기</button>
 			<button type="reset">취소</button>
 		</div>
 </form>
