@@ -23,4 +23,11 @@ public class QnaController {
 		return "home";
 	}
 	
+	@RequestMapping(value="/read", method=RequestMethod.GET)
+	public String read(Model model) {
+		model.addAttribute("BODY", "READ");
+		model.addAttribute("MENU", "QNA");
+		return "home";
+	}
+	
 }

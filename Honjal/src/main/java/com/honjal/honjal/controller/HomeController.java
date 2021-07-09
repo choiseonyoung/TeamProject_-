@@ -41,5 +41,4 @@ public class HomeController {
 		model.addAttribute("BODY", "WRITE_ADMIN");
 		return "home";
 	}
-	
 }

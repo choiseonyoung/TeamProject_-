@@ -3,6 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
+<style>
+
+.content_title:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+</style>
+
 <article class="main_box">
       <h2 class="board_title">
       	<c:choose>
@@ -89,19 +98,35 @@
  			<tr>
  				<c:choose>
 	 				<c:when test="${MENU == 'NOTICE' || MENU == 'INFO' || MENU == 'QNA'}">
-		 				<c:forEach begin="1" end="5">
-		 					<td>테스트 테스트 테스트</td>
-		 				</c:forEach>
+		 					<td class="content_num"></td>
+		 					<td class="content_title">테스트테스트</td>
+		 					<td class="content_nname"></td>
+		 					<td class="content_date">555</td>
+		 					<td class="content_view">555</td>
 	 				</c:when>
 	 				<c:when test="${MENU == 'TIP' || MENU == 'REVIEW'}">
-		 				<c:forEach begin="1" end="7">
-		 					<td>테스트 테스트 테스트</td>
-		 				</c:forEach>
+		 					<td class="content_num"></td>
+		 					<td class="board_code"></td>
+		 					<td class="content_title">테스트</td>
+		 					<td class="content_nname"></td>
+		 					<td class="content_date"></td>
+		 					<td class="content_view">555</td>
+		 					<td class="content_good">555</td>
 	 				</c:when>
-	 				<c:when test="${MENU == 'INTERIOR' || MENU == 'TALK'}">
-		 				<c:forEach begin="1" end="6">
-		 					<td>테스트 테스트 테스트</td>
-		 				</c:forEach>
+	 				<c:when test="${MENU == 'TALK'}">
+		 					<td class="content_num"></td>
+		 					<td class="board_code"></td>
+		 					<td class="content_title">테스트테스트테스트</td>
+		 					<td class="content_nname"></td>
+		 					<td class="content_date"></td>
+		 					<td class="content_view">555</td>
+	 				</c:when>
+	 				<c:when test="${MENU == 'INTERIOR'}">
+		 					<td class="content_num"></td>
+		 					<td class="content_title">테스트테스트테스트</td>
+		 					<td class="content_nname"></td>
+		 					<td class="content_date"></td>
+		 					<td class="content_view">555</td>
 	 				</c:when>
  				</c:choose>
  			</tr>
@@ -140,5 +165,31 @@ document.querySelector(".btn_write").addEventListener("click",(e)=>{
 		location.href="${rootPath}/qna/write"
 	}
 })
+
+let table = document.querySelector("table.board")
+if(table) {
+	table.addEventListener("click",(e)=>{
+		let td = e.target
+		if(td.tagName === "TD") {
+			let rootPath = "${rootPath}";
+			if(${MENU == 'NOTICE'}) {
+				rootPath += '/notice'
+			} else if(${MENU == 'INFO'}) {
+				rootPath += "/info"
+			} else if(${MENU == 'TIP'}) {
+				rootPath += "/tip"
+			} else if(${MENU == 'INTERIOR'}) {
+				rootPath += "/interior"
+			} else if(${MENU == 'TALK'}) {
+				rootPath += "/talk/read"
+			} else if(${MENU == 'REVIEW'}) {
+				rootPath +="/review"
+			} else if(${MENU == 'QNA'}) {
+				rootPath += "/qna"
+			}
+			location.href = rootPath + "/read?id=??" ;
+		}
+	})
+}
 
 </script>

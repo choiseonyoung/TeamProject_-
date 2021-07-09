@@ -31,6 +31,7 @@ public class TipController {
 	@RequestMapping(value="/read", method=RequestMethod.GET)
 	public String read(Model model) {
 		model.addAttribute("BODY", "READ");
+		model.addAttribute("MENU", "TIP");
 		return "home";
 	}
 	
