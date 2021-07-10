@@ -11,21 +11,20 @@
       </div>
       
       <section class="content_box">
-        <h3 class="content_title">전대 정문 고기 찐맛집 '술돼지' 리뷰 ~!</h3>
+        <h3 class="content_title">${R.content_title}</h3>
         <div class="content_good_box">
           <img src="${rootPath}/static/images/good.png" />
-          <p>729</p>
+          <p>${R.content_good}</p>
         </div>
         <div class="content_w_box">
-          <p class="content_date">2021-06-14 09:45</p>
+          <p class="content_date">${R.content_date}</p>
           <div class="content_member">
-            <p>서녕</p>
+            <p>${R.member_nname}</p>
             <img src="${rootPath}/static/images/user.png" class="member_img" />
           </div>
         </div>
         <div class="content_text">
-          <p>광주광역시 북구 전남대학교 정문쪽에 위치한 고깃집 술돼지 ,,</p>
-          <img src="${rootPath}/static/images/sample_meat.jpg" />
+          <p>${R.content_text}</p>
         </div>
         <div class="content_bottom">
           <img src="${rootPath}/static/images/good.png" class="good" />
@@ -78,3 +77,23 @@
       </section>
       
 </div>
+
+<script>
+
+let update_button = document.querySelector(".btn_update")
+let delete_button = document.querySelector(".btn_delete")
+
+update_button.addEventListener("click",()=>{
+	location.href = "${rootPath}/tip/update" + "?content_num=${R.content_num}"
+})
+
+delete_button.addEventListener("click",()=>{
+	if(confirm("글을 삭제하시겠습니까?")) {
+		
+		location.replace("${rootPath}/delete"
+				+ "?g_seq=${GALLERY.g_seq}")
+		
+	}
+})
+
+</script>

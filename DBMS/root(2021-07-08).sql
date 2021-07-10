@@ -12,6 +12,9 @@ CREATE TABLE tbl_member(
 );
 DROP TABLE tbl_member;
 
+INSERT INTO tbl_member(member_level, member_id, member_pw, member_nname, member_email)
+VALUES (0, 'sy', 'sy1', 'csy', 'sy@naver.com'
+
 CREATE TABLE tbl_content(
 	content_num	BIGINT	AUTO_INCREMENT	PRIMARY KEY,
 	member_num	BIGINT	NOT NULL,
@@ -31,6 +34,7 @@ CREATE TABLE tbl_board(
 	board_code	CHAR(4)		PRIMARY KEY,
 	board_name	VARCHAR(20)	NOT NULL	
 );
+DROP TABLE tbl_board;
 
 CREATE TABLE tbl_comment(
 	comment_num	BIGINT	AUTO_INCREMENT	PRIMARY KEY,
@@ -41,6 +45,7 @@ CREATE TABLE tbl_comment(
 	comment_text	VARCHAR(500)	NOT NULL,	
 	comment_time	VARCHAR(20)	NOT NULL	
 );
+DROP TABLE tbl_comment;
 
 CREATE TABLE tbl_file(
 	file_num	BIGINT PRIMARY KEY,
@@ -49,6 +54,7 @@ CREATE TABLE tbl_file(
 	board_code	 CHAR(4) NOT NULL,	
 	file_name	VARCHAR(200) NOT NULL	
 );
+DROP TABLE tbl_file;
 
 CREATE TABLE tbl_scrap(
 	scrap_num	BIGINT	AUTO_INCREMENT	PRIMARY KEY,
@@ -57,6 +63,7 @@ CREATE TABLE tbl_scrap(
 	board_code	 CHAR(4)	NOT NULL,
 	scrap_date	VARCHAR(20)	NOT NULL	
 );
+DROP TABLE tbl_scrap;
 
 -- fk 삭제
 ALTER TABLE tbl_comment
@@ -93,6 +100,7 @@ ADD CONSTRAINT fk_board_code
 FOREIGN KEY (board_code) 
 REFERENCES tbl_board(board_code); 
 
+SELECT * FROM tbl_content;
 
 
 

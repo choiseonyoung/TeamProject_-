@@ -57,6 +57,10 @@ select {
   background-color: #faf5ef;
 }
 
+.board .content_title {
+	text-align: left;
+}
+
 .board tr td {
   overflow: hidden;
   text-overflow: ellipsis;
