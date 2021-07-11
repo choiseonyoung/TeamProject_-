@@ -84,7 +84,7 @@ footer {
 <link href="${rootPath}/static/css/main.css?ver=2021-07-07-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/board.css?ver=2021-07-11-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/join.css?ver=2021-07-07-001" rel="stylesheet" />
-<link href="${rootPath}/static/css/read.css?ver=2021-07-07-001" rel="stylesheet" />
+<link href="${rootPath}/static/css/read.css?ver=2021-07-11-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/write_admin.css?ver=2021-07-07-001" rel="stylesheet" />
 </head>
 <body>
@@ -97,7 +97,7 @@ footer {
 			<li class="menu_list">랜선집들이</li>
 			<li class="menu_list">혼잘TALK</li>
 			<li class="menu_list">리뷰게시판</li>
-			<li class="menu_list">자취 Q&A</li>
+			<li class="menu_list">자취 Q&amp;A</li>
 		</ul>
 	</header>
 	<section id="main_sec">

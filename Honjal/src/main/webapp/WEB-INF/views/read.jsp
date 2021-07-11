@@ -11,20 +11,20 @@
       </div>
       
       <section class="content_box">
-        <h3 class="content_title">${R.content_title}</h3>
+        <h3 class="content_title">${CONTENT.content_title}</h3>
         <div class="content_good_box">
           <img src="${rootPath}/static/images/good.png" />
-          <p>${R.content_good}</p>
+          <p>${CONTENT.content_good}</p>
         </div>
         <div class="content_w_box">
-          <p class="content_date">${R.content_date}</p>
+          <p class="content_date">${CONTENT.content_date} ${CONTENT.content_time}</p>
           <div class="content_member">
-            <p>${R.member_nname}</p>
+            <p>${CONTENT.member_nname}</p>
             <img src="${rootPath}/static/images/user.png" class="member_img" />
           </div>
         </div>
         <div class="content_text">
-          <p>${R.content_text}</p>
+          <p>${CONTENT.content_text}</p>
         </div>
         <div class="content_bottom">
           <img src="${rootPath}/static/images/good.png" class="good" />
@@ -82,17 +82,31 @@
 
 let update_button = document.querySelector(".btn_update")
 let delete_button = document.querySelector(".btn_delete")
+let rootPath = "${rootPath}"
 
-update_button.addEventListener("click",()=>{
-	location.href = "${rootPath}/tip/update" + "?content_num=${R.content_num}"
+	if(${MENU == 'NOTICE'}) {
+		rootPath += '/notice'
+	} else if(${MENU == 'INFO'}) {
+		rootPath += '/info'
+	} else if(${MENU == 'TIP'}) {
+		rootPath += '/tip'
+	} else if(${MENU == 'INTERIOR'}) {
+		rootPath += '/interior'
+	} else if(${MENU == 'TALK'}) {
+		rootPath += '/talk'
+	} else if(${MENU == 'REVIEW'}) {
+		rootPath += '/review'
+	} else if(${MENU == 'QNA'}) {
+		rootPath += '/qna'
+	}
+
+update_button.addEventListener("click",(e)=>{
+	location.href = rootPath + "/update?content_num=${CONTENT.content_num}"
 })
 
-delete_button.addEventListener("click",()=>{
+delete_button.addEventListener("click",(e)=>{
 	if(confirm("글을 삭제하시겠습니까?")) {
-		
-		location.replace("${rootPath}/delete"
-				+ "?g_seq=${GALLERY.g_seq}")
-		
+		location.replace(rootPath + "/delete?content_num=${CONTENT.content_num}")
 	}
 })
 

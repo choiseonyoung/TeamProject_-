@@ -2,21 +2,20 @@ package com.honjal.honjal.service;
 
 import java.util.List;
 
-import com.honjal.honjal.model.ContentDTO;
 import com.honjal.honjal.model.ContentListDTO;
 import com.honjal.honjal.model.ContentVO;
 
 public interface ContentService {
 	
-	public ContentDTO findByIdContent(String content_num);
+	public ContentVO findByIdContent(String content_num);
 	
-	public int insert(ContentVO contentVO) throws Exception;
+	public void insert(ContentVO contentVO) throws Exception;
 	// 글쓰기
 	
-	public int update(ContentVO contentVO) throws Exception;
+	public void update(ContentVO contentVO) throws Exception;
 	// 글수정
 	
-	public int delete(String content_num) throws Exception;
+	public void delete(Integer content_num) throws Exception;
 	// 글삭제
 	
 	
@@ -41,6 +40,7 @@ public interface ContentService {
 	
 	public List<ContentListDTO> MyContent(Integer member_num);
 	// 내글검색
+
 	
 	
 }

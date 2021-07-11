@@ -183,7 +183,15 @@ VALUES ("QNA-1","자취QNA");
 
 
 SELECT * FROM tbl_content
-		WHERE content_num = 2;
+		WHERE content_num = 4;
+
+-- 전체글 목록
+SELECT * FROM tbl_content
+ORDER BY content_num DESC;
+
+SELECT * FROM tbl_content
+WHERE board_code = "TIP-1"
+ORDER BY content_date DESC, content_time DESC;
         
 DELETE FROM tbl_content WHERE content_num = 1;
 

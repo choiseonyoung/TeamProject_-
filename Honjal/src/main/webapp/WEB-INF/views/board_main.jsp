@@ -184,7 +184,7 @@ if(table) {
 			} else if(${MENU == 'INTERIOR'}) {
 				rootPath += "/interior"
 			} else if(${MENU == 'TALK'}) {
-				rootPath += "/talk/read"
+				rootPath += "/talk"
 			} else if(${MENU == 'REVIEW'}) {
 				rootPath +="/review"
 			} else if(${MENU == 'QNA'}) {
