@@ -70,6 +70,11 @@ select {
   font-size: 15px;
 }
 
+.board .content_title:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 .td_title {
   text-align: left;
   cursor: pointer;

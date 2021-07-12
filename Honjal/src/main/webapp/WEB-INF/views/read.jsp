@@ -82,29 +82,29 @@
 
 let update_button = document.querySelector(".btn_update")
 let delete_button = document.querySelector(".btn_delete")
-let rootPath = "${rootPath}"
-
-	if(${MENU == 'NOTICE'}) {
-		rootPath += '/notice'
-	} else if(${MENU == 'INFO'}) {
-		rootPath += '/info'
-	} else if(${MENU == 'TIP'}) {
-		rootPath += '/tip'
-	} else if(${MENU == 'INTERIOR'}) {
-		rootPath += '/interior'
-	} else if(${MENU == 'TALK'}) {
-		rootPath += '/talk'
-	} else if(${MENU == 'REVIEW'}) {
-		rootPath += '/review'
-	} else if(${MENU == 'QNA'}) {
-		rootPath += '/qna'
-	}
+let rootPath = "${rootPath}/board"
 
 update_button.addEventListener("click",(e)=>{
 	location.href = rootPath + "/update?content_num=${CONTENT.content_num}"
 })
 
 delete_button.addEventListener("click",(e)=>{
+	let menu = "${CONTENT.board_code}".substr(0,3)
+	if(menu == 'NOT') {
+		rootPath += '/notice'
+	} else if(menu == 'INF') {
+		rootPath += '/info'
+	} else if(menu == 'TIP') {
+		rootPath += '/tip'
+	} else if(menu == 'INT') {
+		rootPath += '/interior'
+	} else if(menu == 'TAL') {
+		rootPath += '/talk'
+	} else if(menu == 'REV') {
+		rootPath += '/review'
+	} else if(menu == 'QNA') {
+		rootPath += '/qna'
+	}
 	if(confirm("글을 삭제하시겠습니까?")) {
 		location.replace(rootPath + "/delete?content_num=${CONTENT.content_num}")
 	}

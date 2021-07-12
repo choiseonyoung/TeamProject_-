@@ -187,7 +187,7 @@ SELECT * FROM tbl_content
 
 -- 전체글 목록
 SELECT * FROM tbl_content
-ORDER BY content_num DESC;
+ORDER BY content_ntbl_memberum DESC;
 
 SELECT * FROM tbl_content
 WHERE board_code = "TIP-1"

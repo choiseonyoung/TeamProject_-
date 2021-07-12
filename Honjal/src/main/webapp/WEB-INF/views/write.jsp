@@ -53,13 +53,15 @@
 		</fieldset>
 		<div class="write_bottom">
 			<button id="btn_write" type="submit">등록</button>
-			<button type="reset">취소</button>
+			<button id="btn_cancel" type="button">취소</button>
 		</div>
 </form>
 
 <script>
 
+let rootPath = "${rootPath}/board"
 let btn_register = document.querySelector("#btn_write")
+let btn_cancel = document.querySelector("#btn_cancel")
 let input_title = document.querySelector("input[name='content_title']")
 let input_text = document.querySelector("input[name='contente_text']")
 
@@ -76,6 +78,29 @@ if(btn_register) {
 			return false
 		}
 		form.submit()
+	})
+}
+
+if(btn_cancel) {
+	btn_cancel.addEventListener("click", (e)=> {
+		if(${MENU == 'NOTICE'}) {
+			rootPath += '/notice'
+		} else if(${MENU == 'INFO'}) {
+			rootPath += "/info"
+		} else if(${MENU == 'TIP'}) {
+			rootPath += "/tip"
+		} else if(${MENU == 'INTERIOR'}) {
+			rootPath += "/interior"
+		} else if(${MENU == 'TALK'}) {
+			rootPath += "/talk"
+		} else if(${MENU == 'REVIEW'}) {
+			rootPath +="/review"
+		} else if(${MENU == 'QNA'}) {
+			rootPath += "/qna"
+		}
+		if(confirm("글쓰기를 취소하시겠습니까?")) {
+			location.href = rootPath;
+		}
 	})
 }
 

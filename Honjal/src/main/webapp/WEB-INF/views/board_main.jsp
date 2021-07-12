@@ -3,13 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
-<style>
-.content_title:hover {
-	cursor: pointer;
-	text-decoration: underline;
-}
-</style>
-
 <article class="main_box">
 	<h2 class="board_title">
 		<c:choose>
@@ -150,31 +143,34 @@
 <script>
 
 document.querySelector(".btn_write").addEventListener("click",(e)=>{
+let rootPath = "${rootPath}/board"
 	if(${MENU == 'NOTICE'}) {
-		location.href="${rootPath}/notice/write"
+		rootPath += "/notice"
 	} else if(${MENU == 'INFO'}) {
-		location.href="${rootPath}/info/write"
+		rootPath += "/info"
 	} else if(${MENU == 'TIP'}) {
-		location.href="${rootPath}/tip/write"
+		rootPath += "/tip"
 	} else if(${MENU == 'INTERIOR'}) {
-		location.href="${rootPath}/interior/write"
+		rootPath += "/interior"
 	} else if(${MENU == 'TALK'}) {
-		location.href="${rootPath}/talk/write"
+		rootPath += "/talk"
 	} else if(${MENU == 'REVIEW'}) {
-		location.href="${rootPath}/review/write"
+		rootPath += "/review"
 	} else if(${MENU == 'QNA'}) {
-		location.href="${rootPath}/qna/write"
+		rootPath += "/qna"
 	}
+	location.href = rootPath + "/write";
 })
 
 let table = document.querySelector(".board")
 if(table) {
 	table.addEventListener("click",(e)=>{
-		let rootPath = "${rootPath}";
+		let rootPath = "${rootPath}/board";
 		let target = e.target
 		if(target.tagName === "TD") {
 			let tr = target.closest("TR")
 			let cNum = tr.dataset.cnum
+			/*
 			if(${MENU == 'NOTICE'}) {
 				rootPath += '/notice'
 			} else if(${MENU == 'INFO'}) {
@@ -190,6 +186,7 @@ if(table) {
 			} else if(${MENU == 'QNA'}) {
 				rootPath += "/qna"
 			}
+			*/
 			location.href = rootPath + "/read?content_num=" + cNum;
 		}
 	})

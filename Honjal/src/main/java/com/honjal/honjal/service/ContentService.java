@@ -7,7 +7,7 @@ import com.honjal.honjal.model.ContentVO;
 
 public interface ContentService {
 	
-	public ContentVO findByIdContent(String content_num);
+	public ContentVO findByIdContent(Integer content_num);
 	
 	public void insert(ContentVO contentVO) throws Exception;
 	// 글쓰기

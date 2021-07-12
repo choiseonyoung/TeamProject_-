@@ -8,7 +8,7 @@ import com.honjal.honjal.model.ContentVO;
 
 public interface ContentDao extends GenericDao<ContentVO, Integer>{
 
-	public ContentVO findByIdContent(String content_num);
+	public ContentVO findByIdContent(Integer content_num);
 	
 	public List<ContentListDTO> allContent();
 	public List<ContentListDTO> menuContent(String board_code);

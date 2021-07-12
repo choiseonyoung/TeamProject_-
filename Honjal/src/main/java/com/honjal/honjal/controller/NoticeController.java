@@ -67,7 +67,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/read", method=RequestMethod.GET)
-	public String read(String content_num, Model model) {
+	public String read(Integer content_num, Model model) {
 		ContentVO contentVO = contentService.findByIdContent(content_num);
 		model.addAttribute("CONTENT",contentVO);
 		model.addAttribute("BODY", "READ");
@@ -76,7 +76,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String update(String content_num, Model model) {
+	public String update(Integer content_num, Model model) {
 		ContentVO contentVO = contentService.findByIdContent(content_num);
 		model.addAttribute("CONTENT",contentVO);
 		model.addAttribute("BODY", "UPDATE");

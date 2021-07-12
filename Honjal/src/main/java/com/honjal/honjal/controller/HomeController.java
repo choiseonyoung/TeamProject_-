@@ -41,11 +41,4 @@ public class HomeController {
 		model.addAttribute("BODY", "SCRAP");
 		return "home";
 	}
-	
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String write_admin(Model model) {
-		
-		model.addAttribute("BODY", "WRITE_ADMIN");
-		return "home";
-	}
 }

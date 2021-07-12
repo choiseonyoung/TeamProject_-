@@ -18,7 +18,7 @@ public class ContentServiceImplV1 implements ContentService {
 	protected final ContentDao contentDao;
 	
 	@Override
-	public ContentVO findByIdContent(String content_num) {
+	public ContentVO findByIdContent(Integer content_num) {
 		ContentVO contentVO = contentDao.findByIdContent(content_num);
 		return contentVO;
 	}

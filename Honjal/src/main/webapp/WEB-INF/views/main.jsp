@@ -82,7 +82,7 @@
 			<th width="5%">추천</th>
 		</tr>
 		<c:forEach items="${CONTENTS}" var="CONTENT">
-			<tr data-cnum="${CONTENT.content_num}">
+			<tr data-cnum="${CONTENT.content_num}" data-board="${CONTENT.board_code}">
 				<td class="content_num">${CONTENT.content_num}</td>
 				<td class="board_code">${CONTENT.board_code}</td>
 				<td class="content_title">${CONTENT.content_title}</td>
@@ -98,13 +98,34 @@
 <script>
 
 document.querySelector(".btn_signup").addEventListener("click",(e)=>{
-	   let text = e.target.textContent
-	   let url = `${rootPath}`
-	   if(text === "SIGN UP"){
-	      url += "/member/join";
-	   }
-	   location.href = url
+	let text = e.target.textContent
+	let url = `${rootPath}`
+	if(text === "SIGN UP"){
+	   url += "/member/join";
+	}
+	location.href = url
 	})
+	let btn_login = document.querySelector("button.btn_login")
+	let btn_join = document.querySelector("button.btn_signup")
+	let input_memberid = document.querySelector("input[name='member_id']")
+	let input_password = document.querySelector("input[name='member_pw']")
+	if(btn_login){
+		btn_login.addEventListener("click",()=>{
+			let member_id = input_memberid.value
+			let member_pw = input_password.value
+			if(btn_login === ""){
+				alert("ID를 입력하세요")
+				input_memberid.focus()
+				return false
+			}
+			if(member_password === ""){
+				alert("비밀번호를 입력하세요")
+				input_password.focus()
+				return false
+			}
+			form.submit()
+		})
+	}
 	
 let table = document.querySelector(".board")
 if(table) {
@@ -113,7 +134,16 @@ if(table) {
 		if(target.tagName === "TD") {
 			let tr = target.closest("TR")
 			let cNum = tr.dataset.cnum
-			location.href = "${rootPath}/read?content_num=" + cNum;
+			/*
+			let board = tr.dataset.board
+			
+			let controller = ""
+			if(board === "REV-1") {
+				controller = "review";
+			}
+			location.href = "${rootPath}/" + controller + "/read?content_num=" + cNum;
+			*/
+			location.href = "${rootPath}/board/read?content_num=" + cNum;
 		}
 	})
 }

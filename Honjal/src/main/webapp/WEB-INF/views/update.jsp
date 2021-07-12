@@ -55,16 +55,40 @@
 </form>
 
 <script>
+/*
 let write_button = document.querySelector("#btn_write")
 let cancel_button = document.querySelector("#btn_cancel");
 
 
 write_button.addEventListener("click",(e)=>{
-	location.href = "${rootPath}/tip/read?content_num=" + ${CONTENT.content_num}
+	location.href = "${rootPath}/board/read?content_num=" + ${CONTENT.content_num}
 })
 
 cancel_button.addEventListener("click",(e)=>{
-	location.href = "${rootPath}/tip/read?content_num=" + content_num
+	location.href = "${rootPath}/board/read?content_num=" + ${CONTENT.content_num}
 })
+*/
+
+let rootPath = "${rootPath}/board"
+
+document.querySelector("#btn_write").addEventListener("click",(e)=>{
+//	location.href = "${rootPath}/board/read?content_num=${CONTENT.content_num}"
+	if(confirm("수정하시겠습니까?")) {
+		location.replace(rootPath + "/update?content_num=${CONTENT.content_num}")
+	}
+})
+
+document.querySelector("#btn_cancel").addEventListener("click",(e)=> {
+	if(confirm("글수정을 취소하시겠습니까?")) {
+		location.href = rootPath + "/read?content_num=${CONTENT.content_num}";
+	}
+})
+
+/*
+document.querySelector("#btn_cancel").addEventListener("click",(e)=>{
+	location.replace("${rootPath}/board/update?content_num=${CONTENT.content_num}")
+})
+*/
+
 
 </script>

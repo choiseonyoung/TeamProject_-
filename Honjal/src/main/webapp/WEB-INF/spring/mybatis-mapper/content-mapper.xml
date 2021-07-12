@@ -5,7 +5,7 @@
   
  <mapper namespace="com.honjal.honjal.dao.ext.ContentDao">
  
- 	<select id="findByIdContent" parameterType="String" resultType="ContentVO">
+ 	<select id="findByIdContent" parameterType="Integer" resultType="ContentVO">
 		SELECT * FROM tbl_content
 		WHERE content_num = #{content_num}
 	</select>

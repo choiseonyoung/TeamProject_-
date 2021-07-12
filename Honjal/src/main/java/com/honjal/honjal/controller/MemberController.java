@@ -15,27 +15,31 @@ import com.honjal.honjal.model.MemberVO;
 import com.honjal.honjal.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequestMapping(value="/member")
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
-
 	@Autowired
 	public final MemberService memService;
 	
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join(Model model) {
+		
 		model.addAttribute("BODY", "JOIN");
 		return "home";
 	}
 	
+	
 	@RequestMapping(value="/join",method=RequestMethod.POST)
 	public String join(MemberVO memberVO,Model model) {
-		
+		log.debug("회원가입정보{}",memberVO.toString());
 		memberVO = memService.join(memberVO);
-		model.addAttribute("BODY","JOIN");
-		return "home";
+		
+		
+		return "redirect:/";
 	}
 	
 	@ResponseBody
@@ -83,5 +87,4 @@ public class MemberController {
 		session.removeAttribute("MEMBER");
 		return "redirect:/";
 	}
-	
 }

@@ -82,7 +82,7 @@ footer {
 </style>
 <link href="${rootPath}/static/css/nav.css?ver=2021-07-07-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/main.css?ver=2021-07-07-001" rel="stylesheet" />
-<link href="${rootPath}/static/css/board.css?ver=2021-07-11-001" rel="stylesheet" />
+<link href="${rootPath}/static/css/board.css?ver=2021-07-13-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/join.css?ver=2021-07-07-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/read.css?ver=2021-07-11-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/write_admin.css?ver=2021-07-07-001" rel="stylesheet" />
@@ -136,7 +136,7 @@ document.querySelector("header img").addEventListener("click", (e) => {
 
 document.querySelector("#menu_box").addEventListener("click", (e) => {
     let text = e.target.textContent;
-    let url = `${rootPath}`;
+    let url = `${rootPath}/board`;
 
     if (text === "공지사항") {
       url += "/notice";
@@ -152,11 +152,9 @@ document.querySelector("#menu_box").addEventListener("click", (e) => {
       url += "/review";
     } else if (text === "자취 Q&A") {
       url += "/qna";
-    } else if (text === "SIGN UP") {
-      url += "/join";
     }
-
     location.href = url;
   });
+  
 </script>
 </html>
