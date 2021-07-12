@@ -24,13 +24,13 @@ public class MemberController {
 	@Autowired
 	public final MemberService memService;
 	
-	@RequestMapping(value={"/",""},method=RequestMethod.GET)
+	@RequestMapping(value="/join",method=RequestMethod.GET)
 	public String join(Model model) {
 		model.addAttribute(model);
 		return "home";
 	}
 	
-	@RequestMapping(value={"/",""},method=RequestMethod.POST)
+	@RequestMapping(value="/join",method=RequestMethod.POST)
 	public String join(MemberVO memberVO,Model model) {
 		
 		memberVO = memService.join(memberVO);
@@ -83,6 +83,5 @@ public class MemberController {
 		session.removeAttribute("MEMBER");
 		return "redirect:/";
 	}
-	
 	
 }

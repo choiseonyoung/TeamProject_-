@@ -9,7 +9,7 @@
           <input name="" placeholder="ID" />
           <input name="" type="password" placeholder="PASSWORD" />
           <button id="btn_login" type="button">LOGIN</button>
-          <button id="btn_join" type="button">SIGN UP</button>
+          <button id="btn_signup" type="button">SIGN UP</button>
         </form>
       </section>
       <section id="main_slide">
@@ -72,124 +72,50 @@
     <article id="main_bottom">
       <h2>&#128221; 최신글</h2>
       <table class="board">
-        <tr>
-          <th width="10%">No.</th>
-          <th width="10%">게시판</th>
-          <th width="40%">글제목</th>
-          <th width="15%">작성자</th>
-          <th width="10%">작성일</th>
-          <th width="5%">조회</th>
-          <th width="5%">추천</th>
-        </tr>
-        <tr>
-          <td>15801</td>
-          <td>자취Q&A</td>
-          <td class="td_title">입주청소 업체 어디까지 청소해주시나요? <span>[1]</span></td>
-          <td>청소시러</td>
-          <td>09:50</td>
-          <td>7</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>15800</td>
-          <td>혼잘TALK</td>
-          <td class="td_title">자취 꿀팁 50가지 <span>[9]</span></td>
-          <td>푸우</td>
-          <td>09:49</td>
-          <td>62</td>
-          <td>17</td>
-        </tr>
-        <tr>
-          <td>15799</td>
-          <td>혼잘TALK</td>
-          <td class="td_title">하 집가고싶다</td>
-          <td>집가고 싶어요</td>
-          <td>09:45</td>
-          <td>10</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>15798</td>
-          <td>리뷰게시판</td>
-          <td class="td_title">전대 정문 고기 찐맛집 '술돼지' 리뷰 ~! <span>[2]</span></td>
-          <td>돼지</td>
-          <td>09:45</td>
-          <td>35</td>
-          <td>6</td>
-        </tr>
-        <tr>
-          <td>15797</td>
-          <td>생활TIP</td>
-          <td class="td_title">
-            원인 모를 빨래 냄새 없애는, '완벽한' 세탁기 청소법 <span>[7]</span>
-          </td>
-          <td>빨래널기귀찮아</td>
-          <td>09:40</td>
-          <td>80</td>
-          <td>25</td>
-        </tr>
-        <tr>
-          <td>15796</td>
-          <td>혼잘TALK</td>
-          <td class="td_title">알콜프리에 취해 ~쿵짝쿵짝</td>
-          <td>쥬크박스</td>
-          <td>09:39</td>
-          <td>12</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>15795</td>
-          <td>혼잘TALK</td>
-          <td class="td_title">오늘 중흥동에서 점심 같이 드실 분,, <span>[1]</span></td>
-          <td>혼밥러</td>
-          <td>09:38</td>
-          <td>6</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>15794</td>
-          <td>랜선집들이</td>
-          <td class="td_title">
-            낡은 원룸이 집순이의 아지트로 | 3가지만 기억하세요!
-            <span>[12]</span>
-          </td>
-          <td>집순이</td>
-          <td>09:35</td>
-          <td>127</td>
-          <td>40</td>
-        </tr>
-        <tr>
-          <td>15793</td>
-          <td>혼잘TALK</td>
-          <td class="td_title">LG생활건강 생활용품 할인 !! <span>[16]</span></td>
-          <td>버즈</td>
-          <td>09:31</td>
-          <td>85</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>15792</td>
-          <td>공지사항</td>
-          <td class="td_title">
-            1인 가구 커뮤니티 '혼자서도 잘해요' <span>[205]</span>
-          </td>
-          <td>서녕</td>
-          <td>09:25</td>
-          <td>729</td>
-          <td></td>
-        </tr>
-      </table>
+		<tr>
+			<th width="10%">No.</th>
+			<th width="10%" class="content_head">게시판</th>
+			<th width="40%">글제목</th>
+			<th width="15%">작성자</th>
+			<th width="10%">작성일</th>
+			<th width="5%">조회</th>
+			<th width="5%">추천</th>
+		</tr>
+		<c:forEach items="${CONTENTS}" var="CONTENT">
+			<tr data-cnum="${CONTENT.content_num}">
+				<td class="content_num">${CONTENT.content_num}</td>
+				<td class="board_code">${CONTENT.board_code}</td>
+				<td class="content_title">${CONTENT.content_title}</td>
+				<td class="member_nname">${CONTENT.member_nname}</td>
+				<td class="content_date">${CONTENT.content_date}</td>
+				<td class="content_view">${CONTENT.content_view}</td>
+				<td class="content_good">${CONTENT.content_good}</td>
+			</tr>
+		</c:forEach>
+	</table>
     </article>
     
 <script>
 
-document.querySelector("#main_user").addEventListener("click",(e)=>{
+document.querySelector(".btn_signup").addEventListener("click",(e)=>{
 	   let text = e.target.textContent
 	   let url = `${rootPath}`
 	   if(text === "SIGN UP"){
-	      url += "/join";
+	      url += "/member/join";
 	   }
 	   location.href = url
 	})
+	
+let table = document.querySelector(".board")
+if(table) {
+	table.addEventListener("click",(e)=>{
+		let target = e.target
+		if(target.tagName === "TD") {
+			let tr = target.closest("TR")
+			let cNum = tr.dataset.cnum
+			location.href = "${rootPath}/read?content_num=" + cNum;
+		}
+	})
+}
 
 </script>

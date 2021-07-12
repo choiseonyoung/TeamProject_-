@@ -18,12 +18,12 @@ import lombok.RequiredArgsConstructor;
 @Service("memberServiceV1")
 public class MemberServiceImplV1 implements MemberService{
 
-	@Autowired
 	protected final MemberDao memberDao;
 	
 	@Autowired
 	public void create_member_table(MemberDao dummy) {
 		Map<String, String> maps = new HashMap<String, String>();
+		memberDao.create_table(maps);
 	}
 	@Override
 	public MemberVO join(MemberVO memberVO) {
