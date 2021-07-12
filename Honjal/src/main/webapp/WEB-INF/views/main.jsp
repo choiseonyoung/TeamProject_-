@@ -8,8 +8,8 @@
         <form id="login_box" method="POST">
           <input name="" placeholder="ID" />
           <input name="" type="password" placeholder="PASSWORD" />
-          <button id="btn_login" type="button">LOGIN</button>
-          <button id="btn_signup" type="button">SIGN UP</button>
+          <button class="btn_login" type="button">LOGIN</button>
+          <button class="btn_signup" type="button">SIGN UP</button>
         </form>
       </section>
       <section id="main_slide">

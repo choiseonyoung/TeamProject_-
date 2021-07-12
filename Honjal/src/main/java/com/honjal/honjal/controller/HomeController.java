@@ -35,13 +35,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String join(Model model) {
-		
-		model.addAttribute("BODY", "JOIN");
-		return "home";
-	}
-	
 	@RequestMapping(value = "/scrap", method = RequestMethod.GET)
 	public String scrap(Model model) {
 		

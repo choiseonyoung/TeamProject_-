@@ -24,9 +24,9 @@ public class MemberController {
 	@Autowired
 	public final MemberService memService;
 	
-	@RequestMapping(value="/join",method=RequestMethod.GET)
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join(Model model) {
-		model.addAttribute(model);
+		model.addAttribute("BODY", "JOIN");
 		return "home";
 	}
 	
