@@ -2,7 +2,10 @@ package com.honjal.honjal.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.honjal.honjal.dao.ext.ContentDao;
 import com.honjal.honjal.model.ContentListDTO;
@@ -16,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class ContentServiceImplV1 implements ContentService {
 
 	protected final ContentDao contentDao;
+	protected final SqlSession sqlSession;
 	
 	@Override
 	public ContentVO findByIdContent(Integer content_num) {
@@ -54,9 +58,9 @@ public class ContentServiceImplV1 implements ContentService {
 	}
 
 	@Override
-	public List<ContentListDTO> searchTitleContent(String title) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ContentListDTO> searchTitleContent(String menu, String search_word) {
+		List<ContentListDTO> list = contentDao.searchTitleContent(menu, search_word);
+		return list;
 	}
 
 	@Override
@@ -76,7 +80,27 @@ public class ContentServiceImplV1 implements ContentService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	
+	
+	@Override
+	public void view_count(int content_num) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("content-mapper.view_count", content_num);
+	}
+
+	//조회수
+	@Transactional(isolation = Isolation.READ_COMMITTED)
+	@Override
+	public List<ContentListDTO> menuContent(String board_code, int content_num) throws Exception {
+		List<ContentListDTO> contentList = contentDao.menuContent(board_code);
+		contentDao.view_count(content_num);
+		return contentList;
+	}
+	
+	//제목옆댓글수
+	@Override
+	public void comment_count(int content_view) throws Exception {
+		
+	}
 
 }

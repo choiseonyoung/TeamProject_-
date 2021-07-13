@@ -82,7 +82,7 @@ footer {
 </style>
 <link href="${rootPath}/static/css/nav.css?ver=2021-07-07-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/main.css?ver=2021-07-07-001" rel="stylesheet" />
-<link href="${rootPath}/static/css/board.css?ver=2021-07-13-001" rel="stylesheet" />
+<link href="${rootPath}/static/css/board.css?ver=2021-07-14-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/join.css?ver=2021-07-07-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/read.css?ver=2021-07-11-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/write_admin.css?ver=2021-07-07-001" rel="stylesheet" />
@@ -102,6 +102,9 @@ footer {
 	</header>
 	<section id="main_sec">
 		<c:choose>
+			<c:when test="${MEMBER.member_num != NULL }">
+				<%@ include file = "/WEB-INF/views/include/include_member.jspf" %>
+			</c:when>	
 			<c:when test="${BODY == 'BOARD_MAIN' }">
 				<%@ include file="/WEB-INF/views/board_main.jsp"%>
 			</c:when>
@@ -139,17 +142,17 @@ document.querySelector("#menu_box").addEventListener("click", (e) => {
     let url = `${rootPath}/board`;
 
     if (text === "공지사항") {
-      url += "/notice";
+      url += "/not";
     } else if (text === "정보게시판") {
-      url += "/info";
+      url += "/inf";
     } else if (text === "생활 TIP") {
       url += "/tip";
     } else if (text === "랜선집들이") {
-      url += "/interior";
+      url += "/int";
     } else if (text === "혼잘TALK") {
-      url += "/talk";
+      url += "/tal";
     } else if (text === "리뷰게시판") {
-      url += "/review";
+      url += "/rev";
     } else if (text === "자취 Q&A") {
       url += "/qna";
     }

@@ -198,3 +198,26 @@ DELETE FROM tbl_content WHERE content_num = 1;
 UPDATE tbl_content
 SET content_title = "업데이트 테스트", content_text = "업데이트 테스트 내용"
 WHERE content_num = 1;
+
+DESC TBL_CONTENT;
+
+SELECT
+content_num,
+member_num,
+member_nname,
+CO.board_code,
+BO.BOARD_NAME,
+content_date,
+content_time,
+content_view,
+content_good,
+content_title,
+content_text
+FROM TBL_CONTENT CO
+	LEFT JOIN TBL_BOARD BO
+		ON CO.BOARD_CODE = BO.BOARD_CODE;
+	
+
+SELECT * FROM tbl_content
+WHERE content_title LIKE CONCAT('%', "자유", '%') AND board_code = "TAL-1"
+ORDER BY content_num DESC;

@@ -11,10 +11,5 @@
 				<p id="admin">관리자</p>
 			</c:if>
 		</c:if>
-
-		<c:if test="${empty MEMBER}">
-			<p id="login">로그인</p>
-			<p id="join">회원가입</p>
-		</c:if>
 	</div>
 </section>

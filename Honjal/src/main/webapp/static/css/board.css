@@ -12,6 +12,12 @@
   margin-bottom: 10px;
 }
 
+#search_type {
+	height: 80%;
+	border: 0;
+	margin-right: 10px;
+}
+
 .search_input {
   border: 1px solid lightgray;
   border-radius: 15px;
@@ -40,7 +46,7 @@
   margin-bottom: 15px;
 }
 
-select {
+.board select {
   padding: 0px 7px;
   width: 1px;
 }

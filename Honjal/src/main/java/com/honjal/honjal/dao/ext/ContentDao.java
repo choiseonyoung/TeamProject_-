@@ -10,11 +10,17 @@ public interface ContentDao extends GenericDao<ContentVO, Integer>{
 
 	public ContentVO findByIdContent(Integer content_num);
 	
-	public List<ContentListDTO> allContent();
-	public List<ContentListDTO> menuContent(String board_code);
-	
 	public void insert(ContentVO contentVO);
 	public void update(ContentVO contentVO);
 	public void delete(Integer content_num);
+	
+	public List<ContentListDTO> allContent();
+	public List<ContentListDTO> menuContent(String board_code);
+	
+	public List<ContentListDTO> searchTitleContent(String menu, String search_word);
+	
+	public void view_count(int content_num) throws Exception;
+	
+	public void comment_count(int content_num)throws Exception;
 	
 }

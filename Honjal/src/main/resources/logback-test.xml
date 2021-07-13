@@ -14,8 +14,9 @@
 
 
 	<!-- 적용하는 프로젝트의  controller와 service  Package의 level을 debug로 설정 -->
-    <logger name="com.callor.project.controller"><level value="DEBUG"  additivity="false"/></logger>
-    <logger name="com.callor.project.service"><level value="DEBUG"  additivity="false"/></logger>
+	<logger name="com.honjal.honjal"><level value="DEBUG"  additivity="false"/></logger>
+    <logger name="com.honjal.honjal.controller"><level value="DEBUG"  additivity="false"/></logger>
+    <logger name="com.honjal.honjal.searvice"><level value="DEBUG"  additivity="false"/></logger>
     
     <!-- SQL Logger -->
 	<logger name="jdbc.sqltiming" additivity="false">

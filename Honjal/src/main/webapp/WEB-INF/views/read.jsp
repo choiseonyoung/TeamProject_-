@@ -89,25 +89,28 @@ update_button.addEventListener("click",(e)=>{
 })
 
 delete_button.addEventListener("click",(e)=>{
-	let menu = "${CONTENT.board_code}".substr(0,3)
+	let menu = "${CONTENT.board_code}".substr(0,3).toLowerCase()
+	/*
 	if(menu == 'NOT') {
-		rootPath += '/notice'
+		rootPath += '/not'
 	} else if(menu == 'INF') {
-		rootPath += '/info'
+		rootPath += '/inf'
 	} else if(menu == 'TIP') {
 		rootPath += '/tip'
 	} else if(menu == 'INT') {
 		rootPath += '/interior'
 	} else if(menu == 'TAL') {
-		rootPath += '/talk'
+		rootPath += '/tal'
 	} else if(menu == 'REV') {
-		rootPath += '/review'
+		rootPath += '/rev'
 	} else if(menu == 'QNA') {
 		rootPath += '/qna'
 	}
+	*/
 	if(confirm("글을 삭제하시겠습니까?")) {
-		location.replace(rootPath + "/delete?content_num=${CONTENT.content_num}")
+		location.replace(rootPath + "/" + menu + "/delete?content_num=${CONTENT.content_num}")
 	}
+	
 })
 
 </script>

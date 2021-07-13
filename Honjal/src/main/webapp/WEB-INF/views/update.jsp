@@ -17,14 +17,14 @@
 						<option disabled <c:if test="${CONTENT.board_code == 'TIP-4'}">selected</c:if>> 기타</option>
 					</select>
 				</c:when>
-				<c:when test="${MENU == 'TALK'}">
+				<c:when test="${MENU == 'TAL'}">
 					<select>
 						<option disabled>말머리</option>
 						<option disabled <c:if test="${CONTENT.board_code == 'TAL-1'}">selected</c:if>>정보 TALK</option>
 						<option disabled <c:if test="${CONTENT.board_code == 'TAL-2'}">selected</c:if>>자유 TALK</option>
 					</select>
 				</c:when>
-				<c:when test="${MENU == 'REVIEW'}">
+				<c:when test="${MENU == 'REV'}">
 					<select>
 						<option disabled>말머리</option>
 						<option disabled <c:if test="${CONTENT.board_code == 'REV-1'}">selected</c:if>>생활용품</option>
@@ -33,12 +33,13 @@
 					</select>
 				</c:when>
 			</c:choose>
-				<input name="content_title" class="write_title" value="${CONTENT.content_title}"/><br />
+				<input name="content_title" class="write_title" value="${CONTENT.content_title}"/>
 				<div class="file_box">
 					<label for="ex_file">&#128190;</label> <input type="file" id="ex_file" />
 				</div>
 			</div>
 			<textarea name="content_text" class="write_text" >${CONTENT.content_text}</textarea>
+			
 			<input name="content_num" type="hidden" value="${CONTENT.content_num}"/>
 			<input name="member_num" type="hidden" value="${CONTENT.member_num}"/>
 			<input name="member_nname" type="hidden" value="${CONTENT.member_nname}"/>
@@ -49,7 +50,7 @@
 			<input name="content_good" type="hidden" value="${CONTENT.content_good}"/>
 		</fieldset>
 		<div class="write_bottom">
-			<button id="btn_write" type="submit">수정</button>
+			<button id="btn_write" type="submit">등록</button>
 			<button id="btn_cancel" type="button">취소</button>
 		</div>
 </form>

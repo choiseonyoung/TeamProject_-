@@ -38,7 +38,6 @@ public class MemberController {
 		log.debug("회원가입정보{}",memberVO.toString());
 		memberVO = memService.join(memberVO);
 		
-		
 		return "redirect:/";
 	}
 	
@@ -47,12 +46,15 @@ public class MemberController {
 	public String id_check(String member_id) {
 		
 		MemberVO memberVO = memService.findById(member_id);
+        
+		String returnMsg;
 		
 		if(memberVO == null) {
-			return "NOT_USE_ID";
+			returnMsg = "NOT_USE_ID";
 		}else {
-			return "USE_ID";
+			returnMsg = "USE_ID";
 		}
+		return returnMsg;
 	}
 	
 	@RequestMapping(value="/login/{url}")
@@ -68,16 +70,18 @@ public class MemberController {
 		model.addAttribute("BODY","LOGIN");
 		return "home";
 	}
-	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(MemberVO memberVO,Model model,HttpSession session) {
 		
+		log.debug("로그인","무야호");		
 		memberVO = memService.login(memberVO,model);
+		log.debug("로그인","무야호2");
 		if(memberVO == null) {
 			model.addAttribute("BODY","LOGIN");
 			return "home";
-		}else {
-			session.setAttribute("MEMBER", memberVO);
+		}else {			
+			log.debug("로그인","무야호3");			
+			session.setAttribute("MEMBER", memberVO);			
 			return "redirect:/";
 		}
 	}
@@ -87,4 +91,5 @@ public class MemberController {
 		session.removeAttribute("MEMBER");
 		return "redirect:/";
 	}
+	
 }

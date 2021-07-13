@@ -1,7 +1,5 @@
 package com.honjal.honjal.dao.ext;
 
-import java.util.Map;
-
 import com.honjal.honjal.dao.GenericDao;
 import com.honjal.honjal.model.MemberVO;
 

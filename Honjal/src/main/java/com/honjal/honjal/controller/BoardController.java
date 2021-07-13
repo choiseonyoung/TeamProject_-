@@ -17,14 +17,38 @@ import com.honjal.honjal.model.ContentVO;
 import com.honjal.honjal.service.ContentService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/board")
 @Controller
 public class BoardController {
 	
 	protected final ContentService contentService;
+
+	@RequestMapping(value={"/{menu}","/{menu}/"}, method=RequestMethod.GET)
+	public String board(@PathVariable("menu") String menu, Model model) {
+		
+		String menu_str = menu.toUpperCase();
+		String[] menu_arr = menu_str.split("-");
+		// TIP-1 이면(말머리별 보기)  menu_arr 배열에 TIP, 1 이렇게 2개가 담김
+		
+		List<ContentListDTO> list = contentService.menuContent(menu_str);
+		
+		model.addAttribute("CONTENTS", list);
+		
+		if(menu_arr.length > 1) menu_str = menu_arr[0];
+		// /TIP-1로 넘어오면 menu_str에 TIP만 담김
+		
+		model.addAttribute("BODY", "BOARD_MAIN");
+		model.addAttribute("MENU", menu_str);
+		return "home";
+		
+	}
+
 	
+	/*
 	@RequestMapping(value={"/notice",""}, method=RequestMethod.GET)
 	public String notice(Model model) {
 		List<ContentListDTO> list = contentService.menuContent("NOT");
@@ -88,16 +112,19 @@ public class BoardController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/{CAT}/write", method=RequestMethod.GET)
-	public String write( @PathVariable("CAT") String cat,  Model model, HttpSession session) {
+	*/
+	
+	@RequestMapping(value="/{menu}/write", method=RequestMethod.GET)
+	public String write( @PathVariable("menu") String menu,  Model model, HttpSession session) {
 //		MemberVO memberVO = (MemberVO) session.getAttribute("MEMBER");
 //		Integer member_num = memberVO.getMember_num();
 		
 		ContentVO contentVO = ContentVO.builder().member_num(1).member_nname("csy").build();
+		// 로그인 기능 구현되면 member_num과 member_nname은 session에서 가져옴
 		
 		model.addAttribute("CONTENT", contentVO);
 		model.addAttribute("BODY", "WRITE");
-		model.addAttribute("MENU",cat.toUpperCase());
+		model.addAttribute("MENU",menu.toUpperCase());
 		/*
 		if(.equals("TIP")) {
 			model.addAttribute("MENU","TIP");
@@ -110,8 +137,8 @@ public class BoardController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/{CAT}/write", method=RequestMethod.POST)
-	public String write(String category, HttpSession session, ContentVO contentVO) throws Exception {
+	@RequestMapping(value="/{menu}/write", method=RequestMethod.POST)
+	public String write(String bcode, HttpSession session, ContentVO contentVO) throws Exception {
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat st = new SimpleDateFormat("hh:mm:ss");
@@ -120,14 +147,14 @@ public class BoardController {
 		
 //		contentVO = ContentVO.builder().board_code(category).content_date(curDate).content_time(curTime).content_view(0).content_good(0).build();
 		
-		contentVO.setBoard_code(category);
+		contentVO.setBoard_code(bcode);
 		contentVO.setContent_date(curDate);
 		contentVO.setContent_time(curTime);
 		contentVO.setContent_view(0);
 		contentVO.setContent_good(0);
 		
 		contentService.insert(contentVO);
-		return "redirect:/board/{CAT}";
+		return "redirect:/board/{menu}";
 	}
 	
 	@RequestMapping(value="/read", method=RequestMethod.GET)
@@ -142,7 +169,11 @@ public class BoardController {
 	public String update(Integer content_num, Model model) {
 		ContentVO contentVO = contentService.findByIdContent(content_num);
 		String bcode = contentVO.getBoard_code().substring(0, 3);
-		// board_code 앞 3글자 따오기
+		// board_code 앞 3글자 따오기 (TIP)
+		
+		model.addAttribute(bcode);
+		
+		/*
 		if(bcode.equals("TIP")) {
 			model.addAttribute("MENU","TIP");
 		} else if(bcode.equals("TAL")) {
@@ -150,6 +181,8 @@ public class BoardController {
 		} else if(bcode.equals("REV")) {
 			model.addAttribute("MENU","REVIEW");
 		}
+		*/
+		
 		model.addAttribute("CONTENT",contentVO);
 		model.addAttribute("BODY", "UPDATE");
 		return "home";
@@ -162,10 +195,17 @@ public class BoardController {
 		return "redirect:/board/read";
 	}
 	
-	@RequestMapping(value="/{MENU}/delete", method=RequestMethod.GET)
-	public String delete(Integer content_num, String board_code, Model model) throws Exception {
+	@RequestMapping(value="/{menu}/delete", method=RequestMethod.GET)
+	public String delete(Integer content_num, Model model) throws Exception {
 		contentService.delete(content_num);
-		return "redirect:/board/{MENU}";
+		return "redirect:/board/{menu}";
+	}
+	
+	@RequestMapping(value="/{menu}/search/{type}", method=RequestMethod.GET)
+	public String search(@PathVariable("menu") String menu, String search_word, Model model) throws Exception {
+		contentService.searchTitleContent(menu, search_word);
+		model.addAttribute("BODY", "BOARD_MAIN");
+		return "home";
 	}
 	
 }

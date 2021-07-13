@@ -9,7 +9,7 @@
 			<div class="write_top">
 			<c:choose>
 				<c:when test="${MENU == 'TIP'}">
-					<select name="category">
+					<select name="bcode">
 						<option>말머리</option>
 						<option value="TIP-1">청소&amp;세탁</option>
 						<option value="TIP-2">요리</option>
@@ -17,21 +17,23 @@
 						<option value="TIP-4">기타</option>
 					</select>
 				</c:when>
-				<c:when test="${MENU == 'TALK'}">
-					<select name="category">
+				<c:when test="${MENU == 'TAL'}">
+					<select name="bcode">
 						<option>말머리</option>
 						<option value="TAL-1">정보 TALK</option>
 						<option value="TAL-2">자유 TALK</option>
 					</select>
 				</c:when>
-				<c:when test="${MENU == 'REVIEW'}">
-					<select name="category">
+				<c:when test="${MENU == 'REV'}">
+					<select name="bcode">
 						<option>말머리</option>
 						<option value="REV-1">생활용품</option>
 						<option value="REV-2">음식점</option>
 						<option value="REV-3">기타</option>
 					</select>
 				</c:when>
+				<c:otherwise>
+				</c:otherwise>
 			</c:choose>
 				<input name="content_title" class="write_title" /><br />
 				<div class="file_box">
@@ -42,7 +44,7 @@
 			
 			<input name="member_num" type="hidden" value="${CONTENT.member_num}"/>
 			<input name="member_nname" type="hidden" value="${CONTENT.member_nname}"/>
-			<input name="board_code" type="hidden" value="${select[name='category'].value}"/>
+			<input name="board_code" type="hidden" value="${select[name='bcode'].value}"/>
 			
 			<!--
 			<input name="content_date" type="hidden" value="${CONTENT.content_date}"/>
@@ -83,18 +85,18 @@ if(btn_register) {
 
 if(btn_cancel) {
 	btn_cancel.addEventListener("click", (e)=> {
-		if(${MENU == 'NOTICE'}) {
-			rootPath += '/notice'
-		} else if(${MENU == 'INFO'}) {
-			rootPath += "/info"
+		if(${MENU == 'NOT'}) {
+			rootPath += '/not'
+		} else if(${MENU == 'INF'}) {
+			rootPath += "/inf"
 		} else if(${MENU == 'TIP'}) {
 			rootPath += "/tip"
-		} else if(${MENU == 'INTERIOR'}) {
-			rootPath += "/interior"
-		} else if(${MENU == 'TALK'}) {
-			rootPath += "/talk"
-		} else if(${MENU == 'REVIEW'}) {
-			rootPath +="/review"
+		} else if(${MENU == 'INT'}) {
+			rootPath += "/int"
+		} else if(${MENU == 'TAL'}) {
+			rootPath += "/tal"
+		} else if(${MENU == 'REV'}) {
+			rootPath +="/rev"
 		} else if(${MENU == 'QNA'}) {
 			rootPath += "/qna"
 		}
