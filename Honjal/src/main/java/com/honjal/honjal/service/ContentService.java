@@ -27,6 +27,9 @@ public interface ContentService {
 	public List<ContentListDTO> menuContent(String board_code);
 	// 메뉴별 글 리스트 (각 게시판에서 사용)
 	
+	public List<ContentListDTO> menuContentPage(String board_code, int pageNum);
+	// 페이지네이션 적용된 메뉴별 글 리스트 (각 게시판에서 사용)
+	
 	
 	
 	public List<ContentListDTO> searchTitleContent(String menu, String title);
@@ -43,8 +46,6 @@ public interface ContentService {
 	
 
 	public void view_count(int content_view) throws Exception;
-	
-	List<ContentListDTO> menuContent(String board_code, int content_num) throws Exception;
 	
 	public void comment_count (int content_view)throws Exception;
 	

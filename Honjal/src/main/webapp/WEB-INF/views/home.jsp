@@ -102,9 +102,6 @@ footer {
 	</header>
 	<section id="main_sec">
 		<c:choose>
-			<c:when test="${MEMBER.member_num != NULL }">
-				<%@ include file = "/WEB-INF/views/include/include_member.jspf" %>
-			</c:when>	
 			<c:when test="${BODY == 'BOARD_MAIN' }">
 				<%@ include file="/WEB-INF/views/board_main.jsp"%>
 			</c:when>

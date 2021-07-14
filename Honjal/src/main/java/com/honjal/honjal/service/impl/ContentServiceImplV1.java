@@ -1,11 +1,10 @@
 package com.honjal.honjal.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.honjal.honjal.dao.ext.ContentDao;
 import com.honjal.honjal.model.ContentListDTO;
@@ -56,6 +55,24 @@ public class ContentServiceImplV1 implements ContentService {
 		List<ContentListDTO> contentList = contentDao.menuContent(board_code);
 		return contentList;
 	}
+	
+	@Override
+	public List<ContentListDTO> menuContentPage(String board_code, int pageNum) {
+		List<ContentListDTO> contentList = contentDao.menuContent(board_code);
+		int total = contentList.size();
+		int start = (pageNum-1) * 10;
+		int end = pageNum * 10;
+		
+		List<ContentListDTO> pageList = new ArrayList<ContentListDTO>();
+		
+		for (int i = start; i < end; i++) {
+			pageList.add(contentList.get(i));
+		}
+		
+		
+		
+		return pageList;
+	}
 
 	@Override
 	public List<ContentListDTO> searchTitleContent(String menu, String search_word) {
@@ -86,15 +103,6 @@ public class ContentServiceImplV1 implements ContentService {
 	public void view_count(int content_num) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.update("content-mapper.view_count", content_num);
-	}
-
-	//조회수
-	@Transactional(isolation = Isolation.READ_COMMITTED)
-	@Override
-	public List<ContentListDTO> menuContent(String board_code, int content_num) throws Exception {
-		List<ContentListDTO> contentList = contentDao.menuContent(board_code);
-		contentDao.view_count(content_num);
-		return contentList;
 	}
 	
 	//제목옆댓글수

@@ -2,6 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<style>
+	* {
+		list-style: none;
+	}
+	
+	.page_ul {
+		display: flex;
+	}
+	
+</style>
 
 <article class="main_box">
 	<h2 class="board_title">
@@ -157,9 +167,18 @@
 		<button class="btn_write">글쓰기</button>
 	</div>
 	<div class="paging_box">
-		<a href="#">&laquo;</a> <a href="#" class="on">1</a> <a href="#">2</a>
-		<a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">&raquo;</a>
+		<ul class="page_ul">
+			<li data-pnum="1">&lt;&lt;</li>
+			<li data-pnum="${PAGE_NUM - 1}">&lt;</li>
+			<c:forEach begin="1" end="10" var="pageNum">
+				<li data-pnum="${pageNum}" class="<c:if test="${PAGE_NUM == pageNum}">active</c:if>"></li>
+			</c:forEach>
+			<li data-pnum="${PAGE_NUM + 1}">&gt;</li>
+			<li data-pnum="99">&gt;&gt;</li>
+		</ul>
 	</div>
+	
+	
 </article>
 
 <script>

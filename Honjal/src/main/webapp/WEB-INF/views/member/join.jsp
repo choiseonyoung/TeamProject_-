@@ -46,9 +46,8 @@ div.msg {
 		<button>취소</button>
 	</section>
 </form>
-
 <script>
-//location.href = "${rootPath}"
+//  location.href = "${rootPath}"
 document.querySelector("input[name='member_id']").addEventListener("blur",(e)=>{
 	let msg_member_id = document.querySelector("div.member.id")	
 	let memberid = e.currentTarget.value
@@ -148,7 +147,7 @@ document.querySelector("#join_btn").addEventListener("click", (e) => {
     	member_email.focus()
      	return false
     }else{
-    	document.querySelector("form").submit()		
+    	document.querySelector("form").submit()
     }
     
 })
