@@ -227,3 +227,5 @@ ORDER BY content_num DESC;
 SELECT * FROM tbl_content
 WHERE board_code LIKE CONCAT("TIP",'%')
 ORDER BY content_good DESC LIMIT 5;
+
+SELECT * FROM tbl_member;

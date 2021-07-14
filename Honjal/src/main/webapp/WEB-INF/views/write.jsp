@@ -3,6 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 
+<style>
+	#hidden_select {
+		display: none;
+	}
+</style>
 <form class="write_form" method=POST>
 	<h2 class="board_title">글쓰기</h2>
 		<fieldset>
@@ -33,9 +38,16 @@
 					</select>
 				</c:when>
 				<c:otherwise>
+					<select name="bcode" id="hidden_select">
+						<option>말머리</option>
+						<option value="NOT-1" <c:if test="${MENU == 'NOT'}">selected</c:if>>공지사항</option>
+						<option value="INF-1" <c:if test="${MENU == 'INF'}">selected</c:if>>정보게시판</option>
+						<option value="INT-1" <c:if test="${MENU == 'INT'}">selected</c:if>>랜선집들이</option>
+						<option value="QNA-1" <c:if test="${MENU == 'QNA'}">selected</c:if>>Q&amp;A</option>
+					</select>
 				</c:otherwise>
 			</c:choose>
-				<input name="content_title" class="write_title" /><br />
+				<input name="content_title" class="write_title" autofocus/><br />
 				<div class="file_box">
 					<label for="ex_file">&#128190;</label> <input type="file" id="ex_file" />
 				</div>
@@ -62,19 +74,21 @@
 <script>
 
 let rootPath = "${rootPath}/board"
-let btn_register = document.querySelector("#btn_write")
-let btn_cancel = document.querySelector("#btn_cancel")
+let btn_write = document.querySelector("button#btn_write")
+let btn_cancel = document.querySelector("#button#btn_cancel")
 let input_title = document.querySelector("input[name='content_title']")
-let input_text = document.querySelector("input[name='contente_text']")
+let input_text = document.querySelector("textarea[name='content_text']")
 
-if(btn_register) {
-	btn_register.addEventListener("click", (e) => {
-		if(input_title.value === "") {
+if(btn_write) {
+	btn_write.addEventListener("click", (e) => {
+		let title = input_title.value
+		let text = input_text.value
+		if(title === "") {
 			alert("제목을 입력해주세요")
 			input_title.focus()
 			return false
 		}
-		if(input_text.value === "") {
+		if(text === "") {
 			alert("내용을 입력해주세요")
 			input_text.focus()
 			return false

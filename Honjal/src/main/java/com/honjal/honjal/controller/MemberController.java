@@ -61,6 +61,7 @@ public class MemberController {
 	public String login(@PathVariable("url") String url) {
 		return "redirect:/member/login?url=member";
 	}
+	
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String login(@RequestParam(name="url",required = false,defaultValue = "NONE") String url, Model model) {
 		if(url=="NONE") {
@@ -70,6 +71,7 @@ public class MemberController {
 		model.addAttribute("BODY","LOGIN");
 		return "home";
 	}
+	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(MemberVO memberVO,Model model,HttpSession session) {
 		
