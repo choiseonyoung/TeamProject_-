@@ -66,7 +66,6 @@ public class MemberController {
 	public String login(@RequestParam(name="url",required = false,defaultValue = "NONE") String url, Model model) {
 		if(url=="NONE") {
 			model.addAttribute("LOGIN_FAIL","LOGIN_REQ");
-			return "home";
 		}
 		model.addAttribute("BODY","LOGIN");
 		return "home";

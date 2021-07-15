@@ -102,7 +102,6 @@ document.querySelector("input[name='re_pw']").addEventListener("blur",(e)=>{
 	
 	if(e.currentTarget.value != memberpw.value){
 		msg_member_pw1.innerText = " * 비밀번호가 다릅니다"
-		e.currentTarget.focus()
 		return false
 	}
 })
@@ -148,7 +147,7 @@ document.querySelector("#join_btn").addEventListener("click", (e) => {
      	return false
     }else{
     	document.querySelector("form").submit()
+    	alert("회원 가입 성공하셨습니다~~")
     }
-    
 })
 </script>

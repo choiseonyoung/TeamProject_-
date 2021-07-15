@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.honjal.honjal.model.ContentDTO;
 import com.honjal.honjal.model.ContentListDTO;
 import com.honjal.honjal.model.ContentVO;
 import com.honjal.honjal.model.MemberVO;
@@ -143,7 +146,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/{menu}/write", method=RequestMethod.POST)
-	public String write(String bcode, HttpSession session, ContentVO contentVO) throws Exception {
+	public String write(String bcode, HttpSession session, ContentVO contentVO, ContentDTO contentDTO ,MultipartFile one_file, MultipartHttpServletRequest m_file) throws Exception {
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat st = new SimpleDateFormat("hh:mm:ss");
@@ -157,6 +160,7 @@ public class BoardController {
 		contentVO.setContent_time(curTime);
 		contentVO.setContent_view(0);
 		contentVO.setContent_good(0);
+		contentService.input(contentDTO, one_file, m_file);
 		
 		contentService.insert(contentVO);
 		return "redirect:/board/{menu}";

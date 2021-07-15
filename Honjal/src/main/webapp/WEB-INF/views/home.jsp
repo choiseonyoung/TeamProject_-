@@ -80,9 +80,9 @@ footer {
 }
 
 </style>
-<link href="${rootPath}/static/css/nav.css?ver=2021-07-07-001" rel="stylesheet" />
+<link href="${rootPath}/static/css/nav.css?ver=2021-07-15-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/main.css?ver=2021-07-07-001" rel="stylesheet" />
-<link href="${rootPath}/static/css/board.css?ver=2021-07-15-001" rel="stylesheet" />
+<link href="${rootPath}/static/css/board.css?ver=2021-07-15-004" rel="stylesheet" />
 <link href="${rootPath}/static/css/join.css?ver=2021-07-07-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/read.css?ver=2021-07-15-001" rel="stylesheet" />
 <link href="${rootPath}/static/css/write_admin.css?ver=2021-07-07-001" rel="stylesheet" />

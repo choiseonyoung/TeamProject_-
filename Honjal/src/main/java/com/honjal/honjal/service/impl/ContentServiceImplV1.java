@@ -5,8 +5,12 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.honjal.honjal.dao.ext.ContentDao;
+import com.honjal.honjal.model.ContentDTO;
+import com.honjal.honjal.model.ContentFilesDTO;
 import com.honjal.honjal.model.ContentListDTO;
 import com.honjal.honjal.model.ContentVO;
 import com.honjal.honjal.service.ContentService;
@@ -108,6 +112,25 @@ public class ContentServiceImplV1 implements ContentService {
 	//제목옆댓글수
 	@Override
 	public void comment_count(int content_view) throws Exception {
+		
+	}
+
+	@Override
+	public List<ContentFilesDTO> findByIdGalleryFiles(Long g_seq) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ContentFilesDTO findByIdGalleryFilesResultMap(Long g_seq) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void input(ContentDTO ContentDTO, MultipartFile one_file, MultipartHttpServletRequest m_file)
+			throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 

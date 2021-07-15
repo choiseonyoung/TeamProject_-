@@ -2,6 +2,11 @@ package com.honjal.honjal.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.honjal.honjal.model.ContentDTO;
+import com.honjal.honjal.model.ContentFilesDTO;
 import com.honjal.honjal.model.ContentListDTO;
 import com.honjal.honjal.model.ContentVO;
 
@@ -49,4 +54,11 @@ public interface ContentService {
 	
 	public void comment_count (int content_view)throws Exception;
 	
+	
+	public List<ContentFilesDTO> findByIdGalleryFiles(Long g_seq);
+	public ContentFilesDTO findByIdGalleryFilesResultMap(Long g_seq);
+	
+	public void input(ContentDTO ContentDTO, 
+			MultipartFile one_file, 
+			MultipartHttpServletRequest m_file) throws Exception;
 }

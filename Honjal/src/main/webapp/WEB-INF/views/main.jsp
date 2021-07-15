@@ -11,7 +11,6 @@
 			</c:when>
 			<c:otherwise>
 				<form id="login_box" method="POST" action="http://localhost:8080/honjal/member/login">
-					<div class="msg login error"></div>
 					<input name="member_id" placeholder="ID" /> 
 					<input name="member_pw" type="password" placeholder="PASSWORD" />
 					<button class="btn_login" type="button">LOGIN</button>
@@ -107,7 +106,6 @@
 
 let btn_login = document.querySelector("button.btn_login")
 let btn_join = document.querySelector("button.btn_signup")
-let msg_error = document.querySelector("div.msg.login.error")
 let input_memberid = document.querySelector("input[name='member_id']")
 let input_password = document.querySelector("input[name='member_pw']")
 if(btn_join){

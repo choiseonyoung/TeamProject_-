@@ -48,9 +48,12 @@
 				</c:otherwise>
 			</c:choose>
 				<input name="content_title" class="write_title" autofocus/><br />
-				<div class="file_box">
-					<label for="ex_file">&#128190;</label> <input type="file" id="ex_file" />
-				</div>
+				<form method="POST" enctype="multipart/form-data">
+					 <div class="file_box">
+						<label for="ex_file">&#128190;</label> <input type="file" multiple="multiple" name="m_file" id="ex_file" />
+					</div>
+				</form>
+				
 			</div>
 			<textarea name="content_text" class="write_text"></textarea>
 			
@@ -66,7 +69,7 @@
 			-->
 		</fieldset>
 		<div class="write_bottom">
-			<button id="btn_write" type="submit">등록</button>
+			<button id="btn_write" type="button">등록</button>
 			<button id="btn_cancel" type="button">취소</button>
 		</div>
 </form>

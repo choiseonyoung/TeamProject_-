@@ -1,5 +1,7 @@
 package com.honjal.honjal.model;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,5 +22,6 @@ public class FileDTO {
 	private String member_num;	// 유저번호
 	private String board_code;	// 게시판코드
 	private String file_name;	// 파일명
+	private List<FileDTO> fileList;
 
 }
