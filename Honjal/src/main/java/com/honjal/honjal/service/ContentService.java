@@ -2,6 +2,7 @@ package com.honjal.honjal.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -26,13 +27,10 @@ public interface ContentService {
 	
 	
 	
-	public List<ContentListDTO> allContent();
+	public List<ContentListDTO> contentAll();
 	// 올라오는 모든 글 리스트 (메인화면 최신글목록에서 사용)
 	
-	public List<ContentListDTO> menuContent(String board_code);
-	// 메뉴별 글 리스트 (각 게시판에서 사용)
-	
-	public List<ContentListDTO> menuContentPage(String board_code, int pageNum);
+	public List<ContentListDTO> contentMenuAllPage(String board_code, int pageNum, Model model);
 	// 페이지네이션 적용된 메뉴별 글 리스트 (각 게시판에서 사용)
 	
 	
@@ -48,6 +46,7 @@ public interface ContentService {
 	
 	public List<ContentListDTO> MyContent(Integer member_num);
 	// 내가 쓴 글 보기
+	
 	
 
 	public void view_count(int content_view) throws Exception;

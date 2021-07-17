@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -13,16 +14,21 @@ import com.honjal.honjal.model.ContentDTO;
 import com.honjal.honjal.model.ContentFilesDTO;
 import com.honjal.honjal.model.ContentListDTO;
 import com.honjal.honjal.model.ContentVO;
+import com.honjal.honjal.model.PageDTO;
 import com.honjal.honjal.service.ContentService;
+import com.honjal.honjal.service.PageService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service("contentServiceV1")
 public class ContentServiceImplV1 implements ContentService {
 
 	protected final ContentDao contentDao;
 	protected final SqlSession sqlSession;
+	protected final PageService pageService;
 	
 	@Override
 	public ContentVO findByIdContent(Integer content_num) {
@@ -49,33 +55,34 @@ public class ContentServiceImplV1 implements ContentService {
 	}
 	
 	@Override
-	public List<ContentListDTO> allContent() {
-		List<ContentListDTO> list = contentDao.allContent();
+	public List<ContentListDTO> contentAll() {
+		List<ContentListDTO> list = contentDao.contentAll();
 		return list;
 	}
 
-	@Override
-	public List<ContentListDTO> menuContent(String board_code) {
-		List<ContentListDTO> contentList = contentDao.menuContent(board_code);
+	public List<ContentListDTO> contentMenu(String board_code) {
+		List<ContentListDTO> contentList = contentDao.contentMenu(board_code);
 		return contentList;
 	}
 	
 	@Override
-	public List<ContentListDTO> menuContentPage(String board_code, int pageNum) {
-		List<ContentListDTO> contentList = contentDao.menuContent(board_code);
-		int total = contentList.size();
-		int start = (pageNum-1) * 10;
-		int end = pageNum * 10;
+	public List<ContentListDTO> contentMenuAllPage(String menu, int intPageNum, Model model) {
 		
-		List<ContentListDTO> pageList = new ArrayList<ContentListDTO>();
+		List<ContentListDTO> contentAll = contentDao.contentMenu(menu);
+		int totalContents = contentAll.size();
 		
-		for (int i = start; i < end; i++) {
-			pageList.add(contentList.get(i));
+		PageDTO pageDTO = pageService.makePagination(totalContents, intPageNum);
+		
+		List<ContentListDTO> pageList = new ArrayList<>();
+		
+		for(int i = pageDTO.getOffset(); i<pageDTO.getLimit(); i++) {
+			pageList.add(contentAll.get(i));
 		}
 		
+		model.addAttribute("PAGE_NAV", pageDTO);
+		model.addAttribute("CONTENTS", pageList);
 		
-		
-		return pageList;
+		return null;
 	}
 
 	@Override
@@ -133,5 +140,7 @@ public class ContentServiceImplV1 implements ContentService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

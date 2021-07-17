@@ -10,14 +10,14 @@
 		WHERE content_num = #{content_num}
 	</select>
 
-	<select id="allContent" resultType="ContentListDTO">
+	<select id="contentAll" resultType="ContentListDTO">
 		SELECT * FROM tbl_content
 		ORDER BY content_num DESC
 	</select>
 
- 	<select id="menuContent" parameterType="String" resultType="ContentListDTO">
+ 	<select id="contentMenu" parameterType="String" resultType="ContentListDTO">
 		SELECT * FROM tbl_content
-		WHERE board_code LIKE CONCAT(#{board_code}, '%')
+		WHERE board_code LIKE CONCAT(#{menu}, '%')
 		ORDER BY content_num DESC
 	</select>
 	

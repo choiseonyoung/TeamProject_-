@@ -50,32 +50,32 @@
 			<input name="content_good" type="hidden" value="${CONTENT.content_good}"/>
 		</fieldset>
 		<div class="write_bottom">
-			<button id="btn_write" type="submit">등록</button>
+			<button id="btn_write" type="button">등록</button>
 			<button id="btn_cancel" type="button">취소</button>
 		</div>
 </form>
 
 <script>
-/*
-let write_button = document.querySelector("#btn_write")
-let cancel_button = document.querySelector("#btn_cancel");
-
-
-write_button.addEventListener("click",(e)=>{
-	location.href = "${rootPath}/board/read?content_num=" + ${CONTENT.content_num}
-})
-
-cancel_button.addEventListener("click",(e)=>{
-	location.href = "${rootPath}/board/read?content_num=" + ${CONTENT.content_num}
-})
-*/
 
 let rootPath = "${rootPath}/board"
+let input_title = document.querySelector("input[name='content_title']")
+let input_text = document.querySelector("textarea[name='content_text']")
 
 document.querySelector("#btn_write").addEventListener("click",(e)=>{
-//	location.href = "${rootPath}/board/read?content_num=${CONTENT.content_num}"
+	let title = input_title.value
+	let text = input_text.value
+	if(title === "") {
+		alert("제목을 입력해주세요")
+		input_title.focus()
+		return false
+	}
+	if(text === "") {
+		alert("내용을 입력해주세요")
+		input_text.focus()
+		return false
+	}
 	if(confirm("수정하시겠습니까?")) {
-		location.replace(rootPath + "/update?content_num=${CONTENT.content_num}")
+		document.querySelector("form").submit()
 	}
 })
 
@@ -85,11 +85,6 @@ document.querySelector("#btn_cancel").addEventListener("click",(e)=> {
 	}
 })
 
-/*
-document.querySelector("#btn_cancel").addEventListener("click",(e)=>{
-	location.replace("${rootPath}/board/update?content_num=${CONTENT.content_num}")
-})
-*/
 
 
 </script>

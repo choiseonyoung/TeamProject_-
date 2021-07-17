@@ -51,6 +51,10 @@
   outline: 0;
 }
 
+body {
+	overflow: scroll;
+}
+
 .main_box, #join_form, .write_form {
 	font-family: "NanumBarunGothic";
   width: 1050px;

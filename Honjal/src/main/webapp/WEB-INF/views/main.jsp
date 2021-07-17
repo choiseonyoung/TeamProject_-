@@ -100,6 +100,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<%@ include file="/WEB-INF/views/include/include_page_nav.jspf" %>
     </article>
     
 <script>
@@ -152,15 +153,6 @@ if(table) {
 		if(target.tagName === "TD") {
 			let tr = target.closest("TR")
 			let cNum = tr.dataset.cnum
-			/*
-			let board = tr.dataset.board
-			
-			let controller = ""
-			if(board === "REV-1") {
-				controller = "review";
-			}
-			location.href = "${rootPath}/" + controller + "/read?content_num=" + cNum;
-			*/
 			location.href = "${rootPath}/board/read?content_num=" + cNum;
 		}
 	})
