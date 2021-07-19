@@ -76,6 +76,10 @@ if(page_ul) {
 		const li = e.target
 		if(li.tagName === "LI") {
 			const pageNum = e.target.dataset.pnum
+			if(pageNum > ${PAGE_NAV.endPage}) {
+				return false
+			}
+			// 마지막페이지에서는 다음페이지 버튼이 안 먹게
 			location.href = "${rootPath}" + menu + "?pageNum=" + pageNum;
 		}
 	})

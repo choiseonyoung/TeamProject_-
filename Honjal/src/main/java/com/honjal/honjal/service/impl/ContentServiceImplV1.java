@@ -1,19 +1,19 @@
 package com.honjal.honjal.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.honjal.honjal.dao.ext.ContentDao;
-import com.honjal.honjal.model.ContentDTO;
-import com.honjal.honjal.model.ContentFilesDTO;
+import com.honjal.honjal.dao.ext.ContentGoodDao;
+import com.honjal.honjal.model.BestContentVO;
 import com.honjal.honjal.model.ContentListDTO;
 import com.honjal.honjal.model.ContentVO;
+import com.honjal.honjal.model.GoodVO;
 import com.honjal.honjal.model.PageDTO;
 import com.honjal.honjal.service.ContentService;
 import com.honjal.honjal.service.PageService;
@@ -27,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ContentServiceImplV1 implements ContentService {
 
 	protected final ContentDao contentDao;
+	protected final ContentGoodDao contentGoodDao;
 	protected final SqlSession sqlSession;
 	protected final PageService pageService;
 	
@@ -53,12 +54,6 @@ public class ContentServiceImplV1 implements ContentService {
 		contentDao.delete(content_num);
 		return;
 	}
-	
-	@Override
-	public List<ContentListDTO> contentAll() {
-		List<ContentListDTO> list = contentDao.contentAll();
-		return list;
-	}
 
 	public List<ContentListDTO> contentMenu(String board_code) {
 		List<ContentListDTO> contentList = contentDao.contentMenu(board_code);
@@ -84,63 +79,44 @@ public class ContentServiceImplV1 implements ContentService {
 		
 		return null;
 	}
-
-	@Override
-	public List<ContentListDTO> searchTitleContent(String menu, String search_word) {
-		List<ContentListDTO> list = contentDao.searchTitleContent(menu, search_word);
-		return list;
-	}
-
-	@Override
-	public List<ContentListDTO> searchTextContent(String text) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ContentListDTO> searchNameContent(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ContentListDTO> MyContent(Integer member_num) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	
 	@Override
-	public void view_count(int content_num) throws Exception {
-		// TODO Auto-generated method stub
-		sqlSession.update("content-mapper.view_count", content_num);
+	public int checkGood(GoodVO goodVO) {
+		return contentGoodDao.checkGood(goodVO);
+	}
+
+	@Override
+	public void insertGood(GoodVO goodVO) {
+		contentGoodDao.insertGood(goodVO);
+		contentGoodDao.insertUpGood(goodVO);
+		return;
+	}
+
+	@Override
+	public void deleteGood(GoodVO goodVO) {
+		contentGoodDao.deleteGood(goodVO);
+		contentGoodDao.deleteUpGood(goodVO);
+		return;
+	}
+
+	@Override
+	public int getGood(Integer content_num) {
+		int good = contentGoodDao.getGood(content_num);
+		return good;
+	}
+
+	@Override
+	public List<BestContentVO> bestContent() {
+		List<BestContentVO> bList = contentDao.bestContent();
+		return bList;
 	}
 	
-	//제목옆댓글수
-	@Override
-	public void comment_count(int content_view) throws Exception {
-		
+	public List<ContentListDTO> infoContent() {
+		List<ContentListDTO> iList = contentDao.contentMenu("INF");
+		Collections.shuffle(iList);
+		return iList;
 	}
-
-	@Override
-	public List<ContentFilesDTO> findByIdGalleryFiles(Long g_seq) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ContentFilesDTO findByIdGalleryFilesResultMap(Long g_seq) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void input(ContentDTO ContentDTO, MultipartFile one_file, MultipartHttpServletRequest m_file)
-			throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	
 
 }

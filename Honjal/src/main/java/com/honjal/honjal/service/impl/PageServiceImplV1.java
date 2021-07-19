@@ -29,13 +29,15 @@ public class PageServiceImplV1 implements PageService {
 		
 		log.debug("totalPages {}", totalPages);
 		
-		int startPage = intPageNum - (this.navsPerPage/2);
-		// 페이지nav의 제일 앞(왼쪽) 페이지 번호 = 클릭한페이지에서 표시하는 페이지의 수를 절반으로 나눈 걸 뺌 
-		startPage = startPage < 1 ? 1 : startPage;
+		int startPage = intPageNum - (intPageNum%10) + 1;
+		// 페이지nav의 제일 앞(왼쪽) 페이지 번호 = 클릭한페이지에서 표시하는 페이지의 수를 절반으로 나눈 걸 뺌
+		// 수정 -> 선택한 페이지의 일의자리 숫자를 빼고 1을 더함
+//		startPage = startPage < 1 ? 1 : startPage;
 		// startPage가 1보다 작으면 1로 설정한다 (0페이지,마이너스페이지는 없으니까)
 		
-		int endPage = startPage + this.navsPerPage - 1;
-		// 페이지nav의 제일 뒤(오른쪽) 페이지 변호 = startPage에 표시하는페이지수-1 한 값을 뺌
+		int endPage = startPage + 9;
+		// 페이지nav의 제일 뒤(오른쪽) 페이지 변호 = startPage에 표시하는페이지수-1 한 값을 더함
+		// 수정 -> 제일 왼쪽 페이지 번호 + 9
 		endPage = endPage > totalPages ? totalPages : endPage;
 		// endPage가 총페이지수 숫자보다 크면 총페이지수를 endPage로
 		

@@ -22,11 +22,9 @@
       <section id="main_slide">
         <div id="slide_img_box">
           <img src="${rootPath}/static/images/sample_slide.jpg">
-          <img src="#" class="slide" alt="집" />
-          <img src="#" class="slide" alt="집" />
+          <img src="${rootPath}/static/images/sample_slide2.jpg" class="slide" alt="집" />
+          <img src="${rootPath}/static/images/sample_slide3.jpg" class="slide" alt="집" />
         </div>
-        <button class="btn left">&lang;</button>
-        <button class="btn right">&rang;</button>
         <div id="circleBox">
           <div class="circle"></div>
           <div class="circle"></div>
@@ -38,25 +36,13 @@
 
     <article id="main_middle">
       <section id="main_best">
-        <h2>🔥 [ 생활TIP ] 최근 일주일 인기글</h2>
+        <h2>🔥 최근 일주일 인기글</h2>
         <div>
           <img src="${rootPath}/static/images/sample_best.png"/>
           <ol>
-            <li class="list_best">
-              <span>1위 </span>1시간만에 끝! 벽걸이 에어컨 분해없는 셀프청소 노하우
-            </li>
-            <li class="list_best">
-              <span>2위 </span>니트 세탁법: 이제 드라이 맡기지 말고 집에서 손쉽게!
-            </li>
-            <li class="list_best">
-              <span>3위 </span>옷은 다 어디에 있냐고요? 예쁜 원룸 속 옷 수납법!
-            </li>
-            <li class="list_best">
-              <span>4위 </span>천연세제 3종의 차이점과 활용법, 정리해봤어요
-            </li>
-            <li class="list_best">
-              <span>5위 </span>공간에 따른 효율적인 수납Tip을 알아보아요
-            </li>
+          	<c:forEach items="${BESTLIST}" var="BEST" varStatus="status">
+          		<li class="list_best"><a href="${rootPath}/board/read?content_num=${BEST.content_num}"><span>${status.count}위&nbsp&nbsp</span>${BEST.content_title}</a></li>
+          	</c:forEach>
           </ol>
         </div>
       </section>
@@ -65,11 +51,9 @@
         <div>
           <img src="${rootPath}/static/images/sample_data.png"/>
           <ul>
-            <li class="list_data">전국 생활 쓰레기 배출 정보</li>
-            <li class="list_data">전국 전기 차 충전소 정보</li>
-            <li class="list_data">전국 공중 화장실 정보</li>
-            <li class="list_data">전국 여성 안심 택배함 정보</li>
-            <li class="list_data">전국 자전거 보관소 정보</li>
+            <c:forEach items="${INFOLIST}" var="INFO" begin="1" end="5">
+          		<li class="list_info"><a href="${rootPath}/board/read?content_num=${INFO.content_num}">${INFO.content_title}</a></li>
+          	</c:forEach>
           </ul>
         </div>
       </section>
@@ -94,7 +78,12 @@
 				<td class="board_code">${CONTENT.board_code}</td>
 				<td class="content_title">${CONTENT.content_title}</td>
 				<td class="member_nname">${CONTENT.member_nname}</td>
-				<td class="content_date">${CONTENT.content_date}</td>
+				<td class="content_date">
+				<c:choose>
+					<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time}</c:when> 
+					<c:otherwise>${CONTENT.content_date}</c:otherwise>
+				</c:choose>
+				</td>
 				<td class="content_view">${CONTENT.content_view}</td>
 				<td class="content_good">${CONTENT.content_good}</td>
 			</tr>

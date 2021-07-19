@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.honjal.honjal.model.ContentListDTO;
+import com.honjal.honjal.model.CommentVO;
 import com.honjal.honjal.model.ContentVO;
+import com.honjal.honjal.model.GoodVO;
 import com.honjal.honjal.model.MemberVO;
-import com.honjal.honjal.model.PageDTO;
+import com.honjal.honjal.service.CommentService;
 import com.honjal.honjal.service.ContentService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	
 	protected final ContentService contentService;
+	protected final CommentService commentService;
 
 	@RequestMapping(value={"/{menu}","/{menu}/"}, method=RequestMethod.GET)
 	public String board(@PathVariable("menu") String menu, Model model, HttpSession session, 
@@ -48,6 +50,10 @@ public class BoardController {
 		
 		contentService.contentMenuAllPage(menu, intPageNum, model);
 		
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		String curDate = sd.format(date);
+		model.addAttribute("TODAY", curDate);
 		model.addAttribute("SESSION", session.getAttribute("MEMBER"));
 		model.addAttribute("MENU", menu_str);
 		model.addAttribute("BODY", "BOARD_MAIN");
@@ -103,6 +109,14 @@ public class BoardController {
 	@RequestMapping(value="/read", method=RequestMethod.GET)
 	public String read(Integer content_num, Model model, HttpSession session) {
 		ContentVO contentVO = contentService.findByIdContent(content_num);
+		String bcode = contentVO.getBoard_code().substring(0, 3);
+		
+		MemberVO memberVO = (MemberVO) session.getAttribute("MEMBER");
+		if (memberVO != null) {
+			GoodVO goodVO = GoodVO.builder().content_num(content_num).member_num(memberVO.getMember_num()).build();
+			model.addAttribute("GOOD", contentService.checkGood(goodVO));
+		}
+		model.addAttribute("MENU",bcode);
 		model.addAttribute("CONTENT",contentVO);
 		model.addAttribute("SESSION", session.getAttribute("MEMBER"));
 		model.addAttribute("BODY", "READ");
@@ -112,20 +126,7 @@ public class BoardController {
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(Integer content_num, Model model) {
 		ContentVO contentVO = contentService.findByIdContent(content_num);
-		String bcode = contentVO.getBoard_code().substring(0, 3);
-		// board_code 앞 3글자 따오기 (TIP)
 		
-		model.addAttribute(bcode);
-		
-		/*
-		if(bcode.equals("TIP")) {
-			model.addAttribute("MENU","TIP");
-		} else if(bcode.equals("TAL")) {
-			model.addAttribute("MENU","TALK");
-		} else if(bcode.equals("REV")) {
-			model.addAttribute("MENU","REVIEW");
-		}
-		*/
 		
 		model.addAttribute("CONTENT",contentVO);
 		model.addAttribute("BODY", "UPDATE");
@@ -145,11 +146,61 @@ public class BoardController {
 		return "redirect:/board/{menu}";
 	}
 	
-	@RequestMapping(value="/{menu}/search/{type}", method=RequestMethod.GET)
-	public String search(@PathVariable("menu") String menu, String search_word, Model model) throws Exception {
-		contentService.searchTitleContent(menu, search_word);
-		model.addAttribute("BODY", "BOARD_MAIN");
-		return "home";
+//	@RequestMapping(value="/{menu}/search/{type}", method=RequestMethod.GET)
+//	public String search(@PathVariable("menu") String menu, String search_word, Model model) throws Exception {
+//		contentService.searchTitleContent(menu, search_word);
+//		model.addAttribute("BODY", "BOARD_MAIN");
+//		return "home";
+//	}
+	
+	@ResponseBody
+	@RequestMapping(value="/good/{content_num}", method=RequestMethod.GET)
+	public String good(@PathVariable("content_num") Integer content_num, HttpSession session) {
+		MemberVO memberVO = (MemberVO) session.getAttribute("MEMBER");
+		if(memberVO == null) {
+			return "NULL";			
+		}
+		
+		GoodVO goodVO = GoodVO.builder().content_num(content_num).member_num(memberVO.getMember_num()).build();
+		
+		if(contentService.checkGood(goodVO) == 0) {
+			log.debug("트루 반환");
+			contentService.insertGood(goodVO);
+			return "INSERT";
+		} else {
+			log.debug("폴스 반환");
+			contentService.deleteGood(goodVO);
+			return "DELETE";
+		}
+	}
+	
+	
+	
+	@RequestMapping(value="/read/comment",method=RequestMethod.POST)
+	public String comment(Integer content_num,MemberVO memberVO,CommentVO commentVO,Model model,HttpSession session) {
+		commentService.insert(commentVO);
+		if(memberVO != null) {
+			session.setAttribute("MEMBER", memberVO);	
+		}
+		
+		
+		model.addAttribute("COMMENT",commentVO);
+		log.debug("댓글내용{}",commentVO.toString());
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/read/comment",method=RequestMethod.GET)
+	public String comment(@RequestParam(name="url",required = false,defaultValue = "NONE")String url, CommentVO commentVO,Model model) {
+		
+		if(url=="NONE") {
+			model.addAttribute("COMMENT_FAIL","COMMENT_REQ");
+		}
+		List<CommentVO> commentList = commentService.selectAll(commentVO);
+		log.debug("무야호{}",commentList);
+		model.addAttribute("COMMENT",commentList);
+		return "redirect:/";
+		
+		
 	}
 	
 }

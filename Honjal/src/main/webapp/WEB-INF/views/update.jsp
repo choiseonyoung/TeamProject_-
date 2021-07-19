@@ -7,32 +7,6 @@
 	<h2 class="board_title">글 수정</h2>
 		<fieldset>
 			<div class="write_top">
-			<c:choose>
-				<c:when test="${MENU == 'TIP'}">
-					<select>
-						<option disabled>말머리</option>
-						<option disabled <c:if test="${CONTENT.board_code == 'TIP-1'}">selected</c:if>> 청소&amp;세탁</option>
-						<option disabled <c:if test="${CONTENT.board_code == 'TIP-2'}">selected</c:if>> 요리</option>
-						<option disabled <c:if test="${CONTENT.board_code == 'TIP-3'}">selected</c:if>> 공간활용</option>
-						<option disabled <c:if test="${CONTENT.board_code == 'TIP-4'}">selected</c:if>> 기타</option>
-					</select>
-				</c:when>
-				<c:when test="${MENU == 'TAL'}">
-					<select>
-						<option disabled>말머리</option>
-						<option disabled <c:if test="${CONTENT.board_code == 'TAL-1'}">selected</c:if>>정보 TALK</option>
-						<option disabled <c:if test="${CONTENT.board_code == 'TAL-2'}">selected</c:if>>자유 TALK</option>
-					</select>
-				</c:when>
-				<c:when test="${MENU == 'REV'}">
-					<select>
-						<option disabled>말머리</option>
-						<option disabled <c:if test="${CONTENT.board_code == 'REV-1'}">selected</c:if>>생활용품</option>
-						<option disabled <c:if test="${CONTENT.board_code == 'REV-2'}">selected</c:if>>음식점</option>
-						<option disabled <c:if test="${CONTENT.board_code == 'REV-3'}">selected</c:if>>기타</option>
-					</select>
-				</c:when>
-			</c:choose>
 				<input name="content_title" class="write_title" value="${CONTENT.content_title}"/>
 				<div class="file_box">
 					<label for="ex_file">&#128190;</label> <input type="file" id="ex_file" />

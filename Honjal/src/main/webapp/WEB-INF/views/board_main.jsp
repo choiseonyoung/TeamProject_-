@@ -9,6 +9,7 @@
 .hidden {
 	display: none;
 }
+
 </style>
 
 <article class="main_box">
@@ -105,7 +106,12 @@
 						<td class="content_num">${CONTENT.content_num}</td>
 						<td class="content_title">${CONTENT.content_title}</td>
 						<td class="member_nname">${CONTENT.member_nname}</td>
-						<td class="content_date">${CONTENT.content_date}</td>
+						<td class="content_date">
+							<c:choose>
+								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time}</c:when> 
+								<c:otherwise>${CONTENT.content_date}</c:otherwise>
+							</c:choose>
+						</td>
 						<td class="content_view">${CONTENT.content_view}</td>
 					</tr>
 				</c:forEach>
@@ -127,7 +133,12 @@
 						</td>
 						<td class="content_title">${CONTENT.content_title}</td>
 						<td class="member_nname">${CONTENT.member_nname}</td>
-						<td class="content_date">${CONTENT.content_date}</td>
+						<td class="content_date">
+							<c:choose>
+								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time}</c:when> 
+								<c:otherwise>${CONTENT.content_date}</c:otherwise>
+							</c:choose>
+						</td>
 						<td class="content_view">${CONTENT.content_view}</td>
 						<td class="content_good">${CONTENT.content_good}</td>
 					</tr>
@@ -145,7 +156,12 @@
 						</td>
 						<td class="content_title">${CONTENT.content_title}</td>
 						<td class="member_nname">${CONTENT.member_nname}</td>
-						<td class="content_date">${CONTENT.content_date}</td>
+						<td class="content_date">
+							<c:choose>
+								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time}</c:when> 
+								<c:otherwise>${CONTENT.content_date}</c:otherwise>
+							</c:choose>
+						</td>
 						<td class="content_view">${CONTENT.content_view}</td>
 					</tr>
 				</c:forEach>
@@ -156,7 +172,12 @@
 						<td class="content_num">${CONTENT.content_num}</td>
 						<td class="content_title">${CONTENT.content_title}</td>
 						<td class="member_nname">${CONTENT.member_nname}</td>
-						<td class="content_date">${CONTENT.content_date}</td>
+						<td class="content_date">
+							<c:choose>
+								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time}</c:when> 
+								<c:otherwise>${CONTENT.content_date}</c:otherwise>
+							</c:choose>
+						</td>
 						<td class="content_view">${CONTENT.content_view}</td>
 						<td class="content_good">${CONTENT.content_good}</td>
 					</tr>
@@ -210,7 +231,7 @@ if(button_write) {
 						location.href = "${rootPath}"
 					}
 				} else if(result === "OK") {
-					location.href = "${rootPath}/board" + menu + "/write";
+					location.href = "${rootPath}" + menu + "/write";
 				}
 			})
 	})
@@ -228,16 +249,6 @@ if(table) {
 		}
 	})
 }
-
-/*
-let select = document.querySelector("select.content_head")
-if(select) {
-	select.addEventListener("change",(e)=>{
-		let value = e.target.value
-		location.href = "${rootPath}/board/" + value
-	})
-}
-*/
 
 let head_select = document.querySelector("select[name='content_head']")
 if(head_select) {

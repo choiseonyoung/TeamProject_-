@@ -10,11 +10,6 @@
 		WHERE content_num = #{content_num}
 	</select>
 
-	<select id="contentAll" resultType="ContentListDTO">
-		SELECT * FROM tbl_content
-		ORDER BY content_num DESC
-	</select>
-
  	<select id="contentMenu" parameterType="String" resultType="ContentListDTO">
 		SELECT * FROM tbl_content
 		WHERE board_code LIKE CONCAT(#{menu}, '%')
@@ -41,6 +36,15 @@
  	<delete id="delete" parameterType="Integer">
  		DELETE FROM tbl_content WHERE content_num = #{content_num}
  	</delete>
+ 	
+ 	<select id="bestContent" resultType="BestContentVO">
+ 		SELECT content_num, content_title
+ 		FROM tbl_content
+ 		WHERE content_date BETWEEN DATE_ADD(NOW(), INTERVAL-1 WEEK) AND NOW()
+ 		ORDER BY content_good DESC
+ 		LIMIT 5
+ 	</select>
+ 	
  	
  	<!-- 조회수 -->
  	<update id="view_count" parameterType="int">
