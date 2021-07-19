@@ -51,7 +51,7 @@
         <div>
           <img src="${rootPath}/static/images/sample_data.png"/>
           <ul>
-            <c:forEach items="${INFOLIST}" var="INFO" begin="1" end="5">
+            <c:forEach items="${INFOLIST}" var="INFO" begin="0" end="4">
           		<li class="list_info"><a href="${rootPath}/board/read?content_num=${INFO.content_num}">${INFO.content_title}</a></li>
           	</c:forEach>
           </ul>

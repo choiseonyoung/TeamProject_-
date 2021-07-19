@@ -47,7 +47,6 @@ public class BoardController {
 		if(intPageNum > 0) {
 			model.addAttribute("PAGE_NUM", intPageNum);
 		}
-		
 		contentService.contentMenuAllPage(menu, intPageNum, model);
 		
 		Date date = new Date(System.currentTimeMillis());

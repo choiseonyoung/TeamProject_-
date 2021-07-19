@@ -20,8 +20,12 @@ public class PageServiceImplV1 implements PageService {
 	@Override
 	public PageDTO makePagination(int totalContents, int intPageNum) {
 
-		if(totalContents < 1) return null;
+		if(totalContents < 1) {
+			PageDTO pageDTO = PageDTO.builder().startPage(1).endPage(1).totalPages(1).offset(0).limit(0).build();
+			return pageDTO;
+		};
 		// 이해 필요 : 굳이 있어야 되나
+		// 수정 -> 게시판에 글이 하나도 없으면 null이 반환돼버리고 오류가 뜬다
 		
 		int totalPages = (int)Math.ceil((double)totalContents / (double) this.contentsPerPage);
 		// 이해 필요 : Math.ceil() 아닌가
@@ -44,6 +48,8 @@ public class PageServiceImplV1 implements PageService {
 		int offset = (intPageNum - 1) * this.contentsPerPage;
 		// 이해 필요 : 뒷부분 연산은 지금 클릭한 페이지의 전페이지까지의 글개수아닌가
 		// 꽉찬페이지까지의 글개수 = 클릭한 페이지의 이전페이지 숫자에 한 페이지당 보이는 글 개수를 곱한 값
+		
+		
 		int limit = offset + this.contentsPerPage;
 		// (임시초기화) 끝페이지에 남는 글수 = 꽉찬페이지까지의글개수 + 한 페이지당 글 개수
 		limit = limit > totalContents ? totalContents : limit;

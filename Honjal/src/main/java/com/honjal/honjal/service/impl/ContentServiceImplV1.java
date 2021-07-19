@@ -69,7 +69,6 @@ public class ContentServiceImplV1 implements ContentService {
 		PageDTO pageDTO = pageService.makePagination(totalContents, intPageNum);
 		
 		List<ContentListDTO> pageList = new ArrayList<>();
-		
 		for(int i = pageDTO.getOffset(); i<pageDTO.getLimit(); i++) {
 			pageList.add(contentAll.get(i));
 		}
