@@ -76,7 +76,8 @@ if(page_ul) {
 		const li = e.target
 		if(li.tagName === "LI") {
 			const pageNum = e.target.dataset.pnum
-			if(pageNum > ${PAGE_NAV.endPage}) {
+			if(pageNum > ${PAGE_NAV.totalPages}) {
+				alert("마지막페이지입니다")
 				return false
 			}
 			// 마지막페이지에서는 다음페이지 버튼이 안 먹게

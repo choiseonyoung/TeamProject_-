@@ -10,7 +10,7 @@
 				<%@ include file="/WEB-INF/views/include/include_member.jspf"%>
 			</c:when>
 			<c:otherwise>
-				<form id="login_box" method="POST" action="http://localhost:8080/honjal/member/login">
+				<form id="login_box" method="POST" action="${rootPath}/member/login">
 					<input name="member_id" placeholder="ID" /> 
 					<input name="member_pw" type="password" placeholder="PASSWORD" />
 					<button class="btn_login" type="button">LOGIN</button>
@@ -75,12 +75,22 @@
 		<c:forEach items="${CONTENTS}" var="CONTENT">
 			<tr data-cnum="${CONTENT.content_num}" data-board="${CONTENT.board_code}">
 				<td class="content_num">${CONTENT.content_num}</td>
-				<td class="board_code">${CONTENT.board_code}</td>
+				<td class="board_code">
+					<c:choose>
+						<c:when test="${CONTENT.board_code.substring(0,3) == 'NOT'}">공지사항</c:when>
+						<c:when test="${CONTENT.board_code.substring(0,3) == 'INF'}">정보게시판</c:when>
+						<c:when test="${CONTENT.board_code.substring(0,3) == 'TIP'}">생활TIP</c:when>
+						<c:when test="${CONTENT.board_code.substring(0,3) == 'INT'}">랜선집들이</c:when>
+						<c:when test="${CONTENT.board_code.substring(0,3) == 'TAL'}">혼잘TALK</c:when>
+						<c:when test="${CONTENT.board_code.substring(0,3) == 'REV'}">리뷰게시판</c:when>
+						<c:when test="${CONTENT.board_code.substring(0,3) == 'QNA'}">자취Q&A</c:when>
+					</c:choose>
+				</td>
 				<td class="content_title">${CONTENT.content_title}</td>
 				<td class="member_nname">${CONTENT.member_nname}</td>
 				<td class="content_date">
 				<c:choose>
-					<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time}</c:when> 
+					<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time.substring(0,5)}</c:when> 
 					<c:otherwise>${CONTENT.content_date}</c:otherwise>
 				</c:choose>
 				</td>

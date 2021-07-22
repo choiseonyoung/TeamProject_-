@@ -37,7 +37,7 @@ public class CommentServiceImplV1 implements CommentService{
 	}
 
 	@Override
-	public List<CommentVO> selectAll(CommentVO commentVO) {
+	public List<CommentVO> selectAll() {
 		// TODO Auto-generated method stub
 		List<CommentVO> commentList = commentDao.selectAll();
 		return commentList;

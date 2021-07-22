@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -28,7 +27,6 @@ public class ContentServiceImplV1 implements ContentService {
 
 	protected final ContentDao contentDao;
 	protected final ContentGoodDao contentGoodDao;
-	protected final SqlSession sqlSession;
 	protected final PageService pageService;
 	
 	@Override
@@ -54,21 +52,18 @@ public class ContentServiceImplV1 implements ContentService {
 		contentDao.delete(content_num);
 		return;
 	}
-
-	public List<ContentListDTO> contentMenu(String board_code) {
-		List<ContentListDTO> contentList = contentDao.contentMenu(board_code);
-		return contentList;
-	}
 	
 	@Override
 	public List<ContentListDTO> contentMenuAllPage(String menu, int intPageNum, Model model) {
 		
-		List<ContentListDTO> contentAll = contentDao.contentMenu(menu);
+		List<ContentListDTO> contentAll = contentDao.contentMenuAllPage(menu);
+		// 메뉴별 전체글담기
 		int totalContents = contentAll.size();
 		
 		PageDTO pageDTO = pageService.makePagination(totalContents, intPageNum);
 		
 		List<ContentListDTO> pageList = new ArrayList<>();
+		// 이 페이지에 보여줄 글리스트
 		for(int i = pageDTO.getOffset(); i<pageDTO.getLimit(); i++) {
 			pageList.add(contentAll.get(i));
 		}
@@ -98,11 +93,11 @@ public class ContentServiceImplV1 implements ContentService {
 		return;
 	}
 
-	@Override
-	public int getGood(Integer content_num) {
-		int good = contentGoodDao.getGood(content_num);
-		return good;
-	}
+//	@Override
+//	public int getGood(Integer content_num) {
+//		int good = contentGoodDao.getGood(content_num);
+//		return good;
+//	}
 
 	@Override
 	public List<BestContentVO> bestContent() {
@@ -111,9 +106,17 @@ public class ContentServiceImplV1 implements ContentService {
 	}
 	
 	public List<ContentListDTO> infoContent() {
-		List<ContentListDTO> iList = contentDao.contentMenu("INF");
+		List<ContentListDTO> iList = contentDao.contentMenuAllPage("INF");
 		Collections.shuffle(iList);
 		return iList;
+	}
+	
+	
+	@Override
+	public int view_count(ContentVO contentVO) {
+		// TODO Auto-generated method stub
+		contentDao.view_count(contentVO);
+		return 0;
 	}
 	
 	

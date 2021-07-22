@@ -10,7 +10,7 @@
 		WHERE content_num = #{content_num}
 	</select>
 
- 	<select id="contentMenu" parameterType="String" resultType="ContentListDTO">
+ 	<select id="contentMenuAllPage" parameterType="String" resultType="ContentListDTO">
 		SELECT * FROM tbl_content
 		WHERE board_code LIKE CONCAT(#{menu}, '%')
 		ORDER BY content_num DESC
@@ -45,8 +45,6 @@
  		LIMIT 5
  	</select>
  	
- 	
- 	<!-- 조회수 -->
  	<update id="view_count" parameterType="int">
         UPDATE tbl_content
         SET content_view = content_view + 1

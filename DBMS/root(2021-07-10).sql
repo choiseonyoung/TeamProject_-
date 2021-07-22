@@ -272,3 +272,6 @@ WHERE content_date BETWEEN DATE_ADD(NOW(), INTERVAL-1 WEEK ) AND NOW()
 ORDER BY content_good DESC
 LIMIT 5;
 
+SELECT * FROM tbl_content
+WHERE board_code LIKE CONCAT("INF", '%')
+ORDER BY content_num DESC;

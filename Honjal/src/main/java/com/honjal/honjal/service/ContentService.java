@@ -25,7 +25,7 @@ public interface ContentService {
 	
 	
 	public List<ContentListDTO> contentMenuAllPage(String board_code, int pageNum, Model model);
-	// 페이지네이션 적용된 메뉴별 글 리스트 (각 게시판에서 사용)
+	// 페이지네이션 적용된 메뉴별 글 리스트 (각 게시판, 전체게시판에서도 사용)
 	
 	public int checkGood(GoodVO goodVO);
 	
@@ -33,11 +33,17 @@ public interface ContentService {
 	// 추천
 	public void deleteGood(GoodVO goodVO);
 	// 추천 취소
-	public int getGood(Integer content_num);
+//	public int getGood(Integer content_num);
 	// 추천수 조회
 	
 	
 	public List<BestContentVO> bestContent();
+	// [메인화면] 최근 일주일 인기글
 	public List<ContentListDTO> infoContent();
+	// [메인화면] 정보 게시판 글 랜덤 5개
+	
+	
+	public int view_count(ContentVO contentVO);
+	// 조회수
 
 }

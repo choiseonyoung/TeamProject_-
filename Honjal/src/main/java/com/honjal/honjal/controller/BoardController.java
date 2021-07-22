@@ -53,24 +53,11 @@ public class BoardController {
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		String curDate = sd.format(date);
 		model.addAttribute("TODAY", curDate);
-		model.addAttribute("SESSION", session.getAttribute("MEMBER"));
 		model.addAttribute("MENU", menu_str);
 		model.addAttribute("BODY", "BOARD_MAIN");
 		return "home";
 		
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/write")
-	public String login_check(HttpSession session) {
-		MemberVO memberVO = (MemberVO) session.getAttribute("MEMBER");
-		if(memberVO == null) {
-			return "NULL";
-		}
-		return "OK";
-	}
-	// 글쓰기 버튼 누르면 login 여부 확인한 후 스크립트로 alert창 띄워주기 위해 ajax용 메서드 따로 만듦
-	// write 메서드로 넘어가기 전에 검사해야함
 	
 	@RequestMapping(value="/{menu}/write", method=RequestMethod.GET)
 	public String write( @PathVariable("menu") String menu,  Model model, HttpSession session) {
@@ -86,14 +73,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/{menu}/write", method=RequestMethod.POST)
-	public String write(String bcode, HttpSession session, ContentVO contentVO) throws Exception {
+	public String write(String bcode, ContentVO contentVO) throws Exception {
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat st = new SimpleDateFormat("hh:mm:ss");
+		SimpleDateFormat st = new SimpleDateFormat("HH:mm:ss");
 		String curDate = sd.format(date);
 		String curTime = st.format(date);
-		
-//		contentVO = ContentVO.builder().board_code(category).content_date(curDate).content_time(curTime).content_view(0).content_good(0).build();
 		
 		contentVO.setBoard_code(bcode);
 		contentVO.setContent_date(curDate);
@@ -115,11 +100,36 @@ public class BoardController {
 			GoodVO goodVO = GoodVO.builder().content_num(content_num).member_num(memberVO.getMember_num()).build();
 			model.addAttribute("GOOD", contentService.checkGood(goodVO));
 		}
+		
+		contentVO = contentService.findByIdContent(content_num);
+		model.addAttribute("CONTENT", contentVO);
+		List<CommentVO> commentList = commentService.selectAll();
+		log.debug("댓글리스트{}", commentList.toArray());
+		model.addAttribute("COMMENT", commentList);
+		model.addAttribute("BODY", "READ");
+		
+		contentService.view_count(contentVO);
+		
 		model.addAttribute("MENU",bcode);
 		model.addAttribute("CONTENT",contentVO);
-		model.addAttribute("SESSION", session.getAttribute("MEMBER"));
 		model.addAttribute("BODY", "READ");
 		return "home";
+	}
+	
+	// @ResponseBody
+	@RequestMapping(value = "/read", method = RequestMethod.POST)
+	public String comment(Integer comment_num, Integer content_num, CommentVO commentVO, HttpSession session)
+			throws Exception {
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat st = new SimpleDateFormat("HH:mm:ss");
+		String curTime = st.format(date);
+		commentVO.setComment_time(curTime);
+
+		MemberVO memberVO = (MemberVO) session.getAttribute("MEMBER");
+		commentVO.setComment_writer(memberVO.getMember_nname());
+
+		commentService.insert(commentVO);
+		return "redirect:/board/read?content_num=" + content_num;
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
@@ -163,43 +173,14 @@ public class BoardController {
 		GoodVO goodVO = GoodVO.builder().content_num(content_num).member_num(memberVO.getMember_num()).build();
 		
 		if(contentService.checkGood(goodVO) == 0) {
-			log.debug("트루 반환");
 			contentService.insertGood(goodVO);
 			return "INSERT";
 		} else {
-			log.debug("폴스 반환");
 			contentService.deleteGood(goodVO);
 			return "DELETE";
 		}
 	}
 	
 	
-	
-	@RequestMapping(value="/read/comment",method=RequestMethod.POST)
-	public String comment(Integer content_num,MemberVO memberVO,CommentVO commentVO,Model model,HttpSession session) {
-		commentService.insert(commentVO);
-		if(memberVO != null) {
-			session.setAttribute("MEMBER", memberVO);	
-		}
-		
-		
-		model.addAttribute("COMMENT",commentVO);
-		log.debug("댓글내용{}",commentVO.toString());
-		return "redirect:/";
-	}
-	
-	@RequestMapping(value="/read/comment",method=RequestMethod.GET)
-	public String comment(@RequestParam(name="url",required = false,defaultValue = "NONE")String url, CommentVO commentVO,Model model) {
-		
-		if(url=="NONE") {
-			model.addAttribute("COMMENT_FAIL","COMMENT_REQ");
-		}
-		List<CommentVO> commentList = commentService.selectAll(commentVO);
-		log.debug("무야호{}",commentList);
-		model.addAttribute("COMMENT",commentList);
-		return "redirect:/";
-		
-		
-	}
 	
 }

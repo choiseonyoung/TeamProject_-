@@ -5,7 +5,7 @@ import java.util.List;
 import com.honjal.honjal.model.CommentVO;
 
 public interface CommentService {
-	public List<CommentVO> selectAll(CommentVO commentVO);
+	public List<CommentVO> selectAll();
 	
 	public void insert(CommentVO commentVO);
 	

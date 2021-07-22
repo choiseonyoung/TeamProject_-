@@ -57,12 +57,6 @@
 			<input name="member_nname" type="hidden" value="${CONTENT.member_nname}"/>
 			<input name="board_code" type="hidden" value="${select[name='bcode'].value}"/>
 			
-			<!--
-			<input name="content_date" type="hidden" value="${CONTENT.content_date}"/>
-			<input name="content_time" type="hidden" value="${CONTENT.content_time}"/>
-			<input name="content_view" type="hidden" value="${CONTENT.content_view}"/>
-			<input name="content_good" type="hidden" value="${CONTENT.content_good}"/>
-			-->
 		</fieldset>
 		<div class="write_bottom">
 			<button id="btn_write" type="button">등록</button>
@@ -79,22 +73,24 @@ let input_title = document.querySelector("input[name='content_title']")
 let input_text = document.querySelector("textarea[name='content_text']")
 let select_head = document.querySelector("select[name='bcode']")
 
+
+
 if(btn_write) {
 	btn_write.addEventListener("click", (e) => {
 		let title = input_title.value
 		let text = input_text.value
 		let head = select_head.value
-		if(title === "") {
+		if(title.trim() == "") {
 			alert("제목을 입력해주세요")
 			input_title.focus()
 			return false
 		}
-		if(text === "") {
+		if(text.trim() == "") {
 			alert("내용을 입력해주세요")
 			input_text.focus()
 			return false
 		}
-		if(head === "0") {
+		if(head == "0") {
 			alert("말머리를 선택해주세요")
 			select_head.focus()
 			return false

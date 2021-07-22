@@ -108,7 +108,7 @@
 						<td class="member_nname">${CONTENT.member_nname}</td>
 						<td class="content_date">
 							<c:choose>
-								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time}</c:when> 
+								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time.substring(0,5)}</c:when> 
 								<c:otherwise>${CONTENT.content_date}</c:otherwise>
 							</c:choose>
 						</td>
@@ -135,7 +135,7 @@
 						<td class="member_nname">${CONTENT.member_nname}</td>
 						<td class="content_date">
 							<c:choose>
-								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time}</c:when> 
+								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time.substring(0,5)}</c:when> 
 								<c:otherwise>${CONTENT.content_date}</c:otherwise>
 							</c:choose>
 						</td>
@@ -158,7 +158,7 @@
 						<td class="member_nname">${CONTENT.member_nname}</td>
 						<td class="content_date">
 							<c:choose>
-								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time}</c:when> 
+								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time.substring(0,5)}</c:when> 
 								<c:otherwise>${CONTENT.content_date}</c:otherwise>
 							</c:choose>
 						</td>
@@ -174,7 +174,7 @@
 						<td class="member_nname">${CONTENT.member_nname}</td>
 						<td class="content_date">
 							<c:choose>
-								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time}</c:when> 
+								<c:when test="${TODAY == CONTENT.content_date}">${CONTENT.content_time.substring(0,5)}</c:when> 
 								<c:otherwise>${CONTENT.content_date}</c:otherwise>
 							</c:choose>
 						</td>
@@ -189,7 +189,7 @@
 	<div class="btn_write_box">
 	<c:choose>
 		<c:when test="${MENU == 'NOT' or MENU == 'INF'}">
-			<c:if test="${SESSION.member_level <= 0}">
+			<c:if test="${MEMBER.member_level <= 0}">
 				<button class="btn_write">글쓰기</button>
 			</c:if>
 		</c:when>
@@ -223,24 +223,19 @@ type.addEventListener("change",(e)=>{
 
 if(button_write) {
 	button_write.addEventListener("click",(e)=>{
-		fetch(rootPath + "/write")
-			.then(response=>response.text())
-			.then(result=>{
-				if(result === "NULL") {
-					if(confirm("로그인 후 이용 가능합니다")) {
-						location.href = "${rootPath}"
-					}
-				} else if(result === "OK") {
-					location.href = "${rootPath}" + menu + "/write";
-				}
-			})
+		if("${MEMBER}") {
+			location.href = "${rootPath}" + menu + "/write";
+		} else {
+			if(confirm("로그인 후 이용 가능합니다")) {
+				location.href = "${rootPath}"
+			}
+		}
 	})
 }
 
 let table = document.querySelector(".board")
 if(table) {
 	table.addEventListener("click",(e)=>{
-		let rootPath = "${rootPath}/board";
 		let target = e.target
 		if(target.tagName === "TD") {
 			let tr = target.closest("TR")
