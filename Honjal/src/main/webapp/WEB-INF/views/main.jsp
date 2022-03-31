@@ -49,7 +49,7 @@
       <section id="main_info">
         <h2>&#128270; 정보게시판</h2>
         <div>
-          <img src="${rootPath}/static/images/sample_data.png"/>
+          <!-- <img src="${rootPath}/static/images/sample_data.png"/> -->
           <ul>
             <c:forEach items="${INFOLIST}" var="INFO" begin="0" end="4">
           		<li class="list_info"><a href="${rootPath}/board/read?content_num=${INFO.content_num}">${INFO.content_title}</a></li>

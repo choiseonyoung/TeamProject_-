@@ -24,7 +24,7 @@ a:hover{
 	<div id="login_box">
 		<c:if test="${not empty MEMBER}">
 			<img src="${rootPath}/static/images/user.png" width="50px" height="50px"/>
-			<p id="nname">${MEMBER.member_nname}님환영합니다 !!!</p>
+			<p id="nname">${MEMBER.member_nname}님 환영합니다</p>
 			<a href="${rootPath }/member/logout">로그아웃</a>
 			<c:if test="${MEMBER.member_level == 0}">
 				<p id="admin">관리자</p>
